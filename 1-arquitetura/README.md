@@ -1,7 +1,11 @@
 # 🌐 Arquitetura de monitoramento de multisserviços
-![Arquitetura do ambiente](Multi-Service%20Environment%20Monitoring-v7.drawio.png)
+<p align="center">
+  <img src="Multi-Service Environment Monitoring-v7.drawio.png" alt="Arquitetura do ambiente" width="400">
+</p>
 
-
+<p align="center">
+  <em>Figura 1 — Topologia lógica da arquitetura.</em>
+</p>
 
 Este documento apresenta a especificação técnica, a topologia de redes virtuais e o fluxo de dados do ambiente projetado. O objetivo do design é estruturar e integrar múltiplos serviços (Nginx, App Web, Zabbix, PostgreSQL e Grafana) dentro de um servidor principal (**Docker Host**), centralizando as operações na camada de monitoramento e gerência.
 
