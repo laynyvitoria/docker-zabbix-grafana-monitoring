@@ -8,7 +8,7 @@ Este documento apresenta a especificação técnica, a topologia de redes virtua
 ---
 
 <p align="center">
-  <img src="Multi-Service Environment Monitoring-v7vf.png" alt="Arquitetura do ambiente" width="980" height=800">
+  <img src="Multi-Service Environment Monitoring-v7vf.png" alt="Arquitetura do ambiente" width="980" height= "800">
 </p>
 
 <p align="center">
