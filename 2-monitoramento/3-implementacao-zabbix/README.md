@@ -1,258 +1,129 @@
-\# ⚙️ Implementação Zabbix (Modelo de Monitoramento)
-
-
+# ⚙️ Implementação Zabbix (Modelo de Monitoramento)
 
 Este documento mostra como os alertas definidos no catálogo são aplicados na prática e como podem ser testados manualmente em um ambiente local.
 
-
-
 A ideia aqui não é configuração real do Zabbix ainda, mas sim demonstrar como o monitoramento funcionaria na prática.
 
+---
 
-
-\---
-
-
-
-\## 🧠 Relação com o projeto
-
-
+## 🧠 Relação com o projeto
 
 No projeto existem três camadas principais:
 
+- SLA define o limite aceitável do serviço
+- Catálogo de alertas define o problema (ex: APP-01)
+- Implementação Zabbix mostra como esse problema seria detectado
 
+---
 
-\- SLA define o limite aceitável do serviço
-
-\- Catálogo de alertas define o problema (ex: APP-01)
-
-\- Implementação Zabbix mostra como esse problema seria detectado
-
-
-
-\---
-
-
-
-\## 🔁 Como o monitoramento funciona
-
-
+## 🔁 Como o monitoramento funciona
 
 Todo serviço segue a mesma lógica:
 
+- Item → coleta o dado (ex: HTTP, porta, disco)
+- Trigger → regra que detecta falha
+- Teste → forma manual de validar o comportamento
 
+---
 
-\- Item → coleta o dado (ex: HTTP, porta, disco)
-
-\- Trigger → regra que detecta falha
-
-\- Teste → forma manual de validar o comportamento
-
-
-
-\---
-
-
-
-\## 🌐 APP-01 — Aplicação fora do ar (P1)
-
-
+## 🌐 APP-01 — Aplicação fora do ar (P1)
 
 O que significa: a aplicação não responde ou retorna erro.
 
-
-
-Trigger:  
-
+Trigger:
 `last(/App/http\_status)=0 or last(/App/http\_status)>=500`
 
-
-
-Teste manual:  
-
+Teste manual:
 `curl -I http://localhost`
 
-
-
 Interpretação:
+- 200 → sistema funcionando
+- 500 ou sem resposta → falha detectada
 
-\- 200 → sistema funcionando
+---
 
-\- 500 ou sem resposta → falha detectada
-
-
-
-\---
-
-
-
-\## 🟡 APP-02 — Lentidão da aplicação (P2)
-
-
+## 🟡 APP-02 — Lentidão da aplicação (P2)
 
 O que significa: a aplicação está funcionando, mas lenta.
 
-
-
-Trigger:  
-
+Trigger:
 `avg(/App/response\_time,3m) > 3`
 
-
-
-Teste manual:  
-
+Teste manual:
 `curl -w "%{time\_total}\\n" http://localhost`
 
-
-
 Interpretação:
+- até 3s → normal
+- acima de 3s → degradação
 
-\- até 3s → normal
+---
 
-\- acima de 3s → degradação
-
-
-
-\---
-
-
-
-\## 🗄️ DB-01 — Banco de dados fora do ar (P1)
-
-
+## 🗄️ DB-01 — Banco de dados fora do ar (P1)
 
 O que significa: o banco não está acessível.
 
-
-
-Trigger:  
-
+Trigger:
 `last(/DB/tcp\_5432)=0`
 
-
-
-Teste manual:  
-
+Teste manual:
 `nc -zv localhost 5432`
 
-
-
 Interpretação:
+- succeeded → banco ativo
+- failed → banco indisponível
 
-\- succeeded → banco ativo
+---
 
-\- failed → banco indisponível
-
-
-
-\---
-
-
-
-\## 🟡 DB-02 — Uso alto de disco (P2)
-
-
+## 🟡 DB-02 — Uso alto de disco (P2)
 
 O que significa: risco de falta de armazenamento.
 
-
-
-Trigger:  
-
+Trigger:
 `last(/DB/disk\_usage) > 85`
 
-
-
-Teste manual:  
-
+Teste manual:
 `df -h`
 
-
-
 Interpretação:
+- abaixo de 85% → ok
+- acima de 85% → alerta
 
-\- abaixo de 85% → ok
+---
 
-\- acima de 85% → alerta
-
-
-
-\---
-
-
-
-\## 🌐 NGINX-01 — Entrada do sistema fora do ar (P1)
-
-
+## 🌐 NGINX-01 — Entrada do sistema fora do ar (P1)
 
 O que significa: o ponto de entrada do sistema não responde.
 
-
-
-Trigger:  
-
+Trigger:
 `last(/Nginx/https\_check)=0`
 
-
-
-Teste manual:  
-
+Teste manual:
 `curl -I https://localhost`
 
-
-
 Interpretação:
+- responde → sistema ok
+- sem resposta → falha crítica
 
-\- responde → sistema ok
+---
 
-\- sem resposta → falha crítica
-
-
-
-\---
-
-
-
-\## 📡 MON-01 — Monitoramento fora do ar (P3)
-
-
+## 📡 MON-01 — Monitoramento fora do ar (P3)
 
 O que significa: perda de visibilidade do ambiente.
 
-
-
-Trigger:  
-
+Trigger:
 `last(/Zabbix/server\_status)=0`
 
-
-
-Teste manual:  
-
+Teste manual:
 `systemctl status zabbix-server` ou `docker ps`
 
-
-
 Interpretação:
+- ativo → monitoramento funcionando
+- parado → sistema sem visibilidade
 
-\- ativo → monitoramento funcionando
+---
 
-\- parado → sistema sem visibilidade
-
-
-
-\---
-
-
-
-\## 🎯 Conclusão
-
-
+## 🎯 Conclusão
 
 Este documento conecta os SLAs, os alertas e a forma prática de detecção.
 
-
-
 Ele simula como um ambiente de monitoramento real funciona em operações de infraestrutura e NOC.
-
