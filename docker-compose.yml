@@ -1,9 +1,12 @@
+version: '3.8'
+
 services:
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
@@ -31,6 +34,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     networks:
       - backend-net
+      - app-net   # ✅ necessário para resolução do Zabbix
 
   zabbix-server:
     image: zabbix/zabbix-server-pgsql:ubuntu-latest
@@ -48,4 +52,36 @@ services:
 
   zabbix-web:
     image: zabbix/zabbix-web-nginx-pgsql:ubuntu-latest
-    container_name: z
+    container_name: zabbix-web
+    environment:
+      ZBX_SERVER_HOST: zabbix-server
+      DB_SERVER_HOST: postgres
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - zabbix-server
+      - postgres   # ✅ garante inicialização correta
+    ports:
+      - "8080:8080"
+    networks:
+      - app-net
+      - backend-net   # ✅ agora resolve postgres corretamente
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - zabbix-server
+    networks:
+      - backend-net
+
+networks:
+  public-net:
+  app-net:
+  backend-net:
+
+volumes:
+  pg_data:
