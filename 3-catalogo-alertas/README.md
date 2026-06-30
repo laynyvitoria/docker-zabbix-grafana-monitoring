@@ -67,3 +67,52 @@ Cada alerta segue uma estrutura padrão:
 - **Severidade:** P3
 - **Impacto:** Perda de visibilidade do ambiente
 - **Ação:** Reiniciar serviços de monitoramento
+
+---
+
+## 🧠 Entendendo a estrutura dos códigos de alerta
+
+Cada alerta possui um código padronizado para facilitar identificação rápida durante a operação do sistema.
+
+Exemplo: `ALERTA APP-01`
+
+Esse código é dividido em duas partes:
+
+### 1. Prefixo (tipo de serviço)
+
+Indica qual camada do sistema está sendo monitorada:
+
+- **NGINX** → Camada de entrada (borda do sistema)
+- **APP** → Camada de aplicação (site / serviço principal)
+- **DB** → Camada de dados (PostgreSQL)
+- **MON** → Camada de monitoramento (Zabbix / Grafana)
+
+---
+
+### 2. Número do alerta
+
+Indica a ordem e tipo do problema dentro daquele serviço:
+
+- **01** → falha crítica (serviço fora do ar)
+- **02** → degradação ou risco (lentidão, uso alto, etc.)
+
+---
+
+## ⚖️ Exemplo prático
+
+- `APP-01` → aplicação caiu completamente (crítico)
+- `APP-02` → aplicação está lenta (degradação)
+
+- `DB-01` → banco fora do ar (crítico)
+- `DB-02` → disco quase cheio (risco futuro)
+
+---
+
+## 🎯 Objetivo dessa padronização
+
+Essa estrutura existe para:
+
+- facilitar leitura rápida em ambiente de NOC
+- padronizar incidentes
+- reduzir tempo de resposta
+- organizar prioridades automaticamente (P1, P2, P3)
