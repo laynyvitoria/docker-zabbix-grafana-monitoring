@@ -1,0 +1,15 @@
+# Variáveis sensíveis
+.env
+
+# Python
+__pycache__/
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db

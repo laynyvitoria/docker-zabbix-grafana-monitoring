@@ -1,0 +1,9 @@
+Relatório de execução
+
+já começou automaticamente, porque aconteceu:
+criação das redes
+subida dos containers
+erro de variável
+análise de logs
+correção do YAML
+recriação do ambiente
