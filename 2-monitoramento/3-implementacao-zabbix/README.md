@@ -42,11 +42,11 @@ Todo serviço segue a mesma lógica:
 
 
 
-> \*\*Item\*\* → coleta o dado (ex: HTTP, porta, disco)  
+\- Item → coleta o dado (ex: HTTP, porta, disco)
 
-> \*\*Trigger\*\* → regra que detecta falha  
+\- Trigger → regra que detecta falha
 
-> \*\*Teste\*\* → forma manual de validar o comportamento  
+\- Teste → forma manual de validar o comportamento
 
 
 
@@ -62,19 +62,23 @@ O que significa: a aplicação não responde ou retorna erro.
 
 
 
-> \*\*Trigger:\*\* `last(/App/http\_status)=0 or last(/App/http\_status)>=500`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `curl -I http://localhost`  
+`last(/App/http\_status)=0 or last(/App/http\_status)>=500`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`curl -I http://localhost`
 
-| \*\*200\*\* | sistema funcionando |
 
-| \*\*500 ou sem resposta\*\* | falha detectada |
+
+Interpretação:
+
+\- 200 → sistema funcionando
+
+\- 500 ou sem resposta → falha detectada
 
 
 
@@ -90,19 +94,23 @@ O que significa: a aplicação está funcionando, mas lenta.
 
 
 
-> \*\*Trigger:\*\* `avg(/App/response\_time,3m) > 3`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `curl -w "%{time\_total}\\n" http://localhost`  
+`avg(/App/response\_time,3m) > 3`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`curl -w "%{time\_total}\\n" http://localhost`
 
-| \*\*até 3s\*\* | normal |
 
-| \*\*acima de 3s\*\* | degradação |
+
+Interpretação:
+
+\- até 3s → normal
+
+\- acima de 3s → degradação
 
 
 
@@ -118,19 +126,23 @@ O que significa: o banco não está acessível.
 
 
 
-> \*\*Trigger:\*\* `last(/DB/tcp\_5432)=0`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `nc -zv localhost 5432`  
+`last(/DB/tcp\_5432)=0`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`nc -zv localhost 5432`
 
-| \*\*succeeded\*\* | banco ativo |
 
-| \*\*failed\*\* | banco indisponível |
+
+Interpretação:
+
+\- succeeded → banco ativo
+
+\- failed → banco indisponível
 
 
 
@@ -146,19 +158,23 @@ O que significa: risco de falta de armazenamento.
 
 
 
-> \*\*Trigger:\*\* `last(/DB/disk\_usage) > 85`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `df -h`  
+`last(/DB/disk\_usage) > 85`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`df -h`
 
-| \*\*abaixo de 85%\*\* | ok |
 
-| \*\*acima de 85%\*\* | alerta |
+
+Interpretação:
+
+\- abaixo de 85% → ok
+
+\- acima de 85% → alerta
 
 
 
@@ -174,19 +190,23 @@ O que significa: o ponto de entrada do sistema não responde.
 
 
 
-> \*\*Trigger:\*\* `last(/Nginx/https\_check)=0`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `curl -I https://localhost`  
+`last(/Nginx/https\_check)=0`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`curl -I https://localhost`
 
-| \*\*responde\*\* | sistema ok |
 
-| \*\*sem resposta\*\* | falha crítica |
+
+Interpretação:
+
+\- responde → sistema ok
+
+\- sem resposta → falha crítica
 
 
 
@@ -202,19 +222,23 @@ O que significa: perda de visibilidade do ambiente.
 
 
 
-> \*\*Trigger:\*\* `last(/Zabbix/server\_status)=0`  
+Trigger:  
 
-> \*\*Teste manual:\*\* `systemctl status zabbix-server` ou `docker ps`  
+`last(/Zabbix/server\_status)=0`
 
 
 
-| Interpretação | Cenário |
+Teste manual:  
 
-| :--- | :--- |
+`systemctl status zabbix-server` ou `docker ps`
 
-| \*\*ativo\*\* | monitoramento funcionando |
 
-| \*\*parado\*\* | sistema sem visibilidade |
+
+Interpretação:
+
+\- ativo → monitoramento funcionando
+
+\- parado → sistema sem visibilidade
 
 
 
