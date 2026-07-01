@@ -27,6 +27,7 @@ Todo serviço segue a mesma lógica:
 ---
 
 ## 🌐 APP-01 — Aplicação fora do ar (P1)
+<img src="app-01" alt="Aplicação fora do ar" width="980" height= "850"
 
 O que significa: a aplicação não responde ou retorna erro.
 
