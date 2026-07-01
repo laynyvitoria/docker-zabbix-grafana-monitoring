@@ -100,7 +100,9 @@ início da implementação prática no painel web do Zabbix com a abertura da te
 
 resolução de inconsistências de campos obrigatórios de rede (como o erro de DNS name vazio) e limpeza de templates de nuvens públicas não utilizados no escopo local
 
-criação do primeiro item de monitoramento HTTP no Zabbix para a App Web (HTTP agent apontando para http://app-web:80)
+
+
+criação do primeiro item de monitoramento HTTP no Zabbix para a App Web (HTTP agent apontando para \[http://app-web:80](http://app-web:80))
 
 
 
@@ -144,7 +146,41 @@ teste de comunicação entre Nginx e App Web após restart confirmando HTTP 200 
 
 validação do comportamento do item em Monitoring → Latest data com retorno HTML correto da aplicação
 
-### &#x09;**-oq falta:**
+
+
+ajuste e correção do monitoramento de host PostgreSQL no Zabbix (interface do host e consistência de comunicação com o agent)
+
+
+
+validação da coleta de métricas via Zabbix agent (active checks habilitados para PostgreSQL)
+
+
+
+confirmação de funcionamento do item de uso de disco (vfs.fs.size\[/,pused]) com atualização contínua em Latest data
+
+
+
+correção do estado de disponibilidade do host (ZBX verde após estabilização do modo de coleta active)
+
+
+
+validação completa da comunicação Zabbix Server ↔ Zabbix Agent via zabbix\_get e agent.ping
+
+
+
+identificação e correção do comportamento de coleta (diferença entre passive checks e active checks no ambiente Docker)
+
+
+
+estabilização final do monitoramento do PostgreSQL com métricas sendo coletadas corretamente em tempo real
+
+
+
+\---
+
+
+
+\* oq falta:
 
 
 
@@ -152,7 +188,7 @@ bld FASE 3 — Configurar ZABBIX
 
 
 
-(concluir a criação do host App Web, criar os hosts Nginx e PostgreSQL, criar os itens manuais de checagem e configurar as triggers APP-01, APP-02, DB-01, NGINX-01 para validação de alertas)
+(concluir a criação dos hosts App Web, Nginx e PostgreSQL, consolidar os itens de monitoramento e finalizar triggers APP-02, DB-01, DB-02, NGINX-01 e MON-01)
 
 
 
@@ -185,4 +221,6 @@ bld FASE 7 — TESTE COMPLETO
 
 
 (execução do ciclo completo de NOC do início ao fim com registro de incidente)
+
+
 
