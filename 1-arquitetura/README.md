@@ -58,10 +58,3 @@ Um **Docker Volume independente (`Volume: pg_data`)** foi acoplado diretamente a
 
 ---
 
-## 📊 Regras de alertas e metas de acordo de nível de serviço (SLA)
-
-A infraestrutura foi modelada para alimentar e medir três indicadores técnicos de desempenho:
-
-* **Disponibilidade da Borda (SLA de 99.9%):** Medição da taxa de erros HTTP do tipo 5xx no Nginx. Dispara um alerta automático caso o índice de erros internos passe de 5% dentro do intervalo de 1 minuto.
-* **Performance da Aplicação (SLA de 99.5%):** Medição do tempo de carregamento da URL da App Web. Dispara um alerta crítico se o site ficar fora do ar ou demorar mais de 3 segundos para responder por 3 checagens consecutivas do Zabbix.
-* **Capacidade de Armazenamento:** Monitoramento do espaço físico em disco ocupado pelo PostgreSQL. Gera um alerta de severidade alta caso o volume de dados históricos atinja 85% do espaço total alocado.

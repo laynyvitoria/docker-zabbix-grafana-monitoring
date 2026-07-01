@@ -83,8 +83,8 @@ Cada alerta segue a estrutura:
 
 ## 🔴 APP-01 — Aplicação fora do ar (P1)
 
-- Condição: HTTP 5xx ou timeout
-- Trigger: HTTP status = 0 ou >= 500
+- Condição: timeout
+- Trigger: no data >1s
 - Impacto: usuário não consegue acessar o sistema
 - Ação: verificar logs e container
 
