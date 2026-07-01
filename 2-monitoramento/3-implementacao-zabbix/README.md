@@ -32,7 +32,7 @@ Todo serviço segue a mesma lógica:
 O que significa: a aplicação não responde ou retorna erro.
 
 Trigger:
-`last(/App/http\_status)=0 or last(/App/http\_status)>=500`
+`nodata(/App Web/app.web.check,1m)=1`
 
 Teste manual:
 `curl -I http://localhost`
@@ -48,7 +48,7 @@ Interpretação:
 O que significa: a aplicação está funcionando, mas lenta.
 
 Trigger:
-`avg(/App/response\_time,3m) > 3`
+`last(/App Web/app.web.response.time)>3`
 
 Teste manual:
 `curl -w "%{time\_total}\\n" http://localhost`
@@ -64,7 +64,7 @@ Interpretação:
 O que significa: o banco não está acessível.
 
 Trigger:
-`last(/DB/tcp\_5432)=0`
+`last(/PostgreSQL/net.tcp.service[tcp,postgres,5432])=0`
 
 Teste manual:
 `nc -zv localhost 5432`
@@ -80,7 +80,7 @@ Interpretação:
 O que significa: risco de falta de armazenamento.
 
 Trigger:
-`last(/DB/disk\_usage) > 85`
+`last(/PostgreSQL/vfs.fs.size[/,pused])>85`
 
 Teste manual:
 `df -h`
@@ -96,7 +96,7 @@ Interpretação:
 O que significa: o ponto de entrada do sistema não responde.
 
 Trigger:
-`last(/Nginx/https\_check)=0`
+`nodata(/Nginx/nginx.http.check,1m)=1`
 
 Teste manual:
 `curl -I https://localhost`
@@ -112,7 +112,7 @@ Interpretação:
 O que significa: perda de visibilidade do ambiente.
 
 Trigger:
-`last(/Zabbix/server\_status)=0`
+`nodata(/Zabbix server/agent.ping,3m)=1`
 
 Teste manual:
 `systemctl status zabbix-server` ou `docker ps`
