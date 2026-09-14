@@ -34,17 +34,78 @@ Essa estrutura garante consistência entre a detecção automática e a validaç
 
 <img src="app-01.png" alt="Aplicação fora do ar" width="980">
 
-O que significa: a aplicação não responde ou retorna erro.
+O que significa: a aplicação está indisponível quando o serviço `app-web` deixa de aceitar conexões na porta 80.
 
-Trigger:
-`nodata(/App Web/app.web.check,1m)=1`
+**Item:**
 
-Teste manual:
-`curl -I http://localhost`
+`net.tcp.service[tcp,app-web,80]`
 
-Interpretação:
-- 200 → sistema funcionando  
-- 500 ou sem resposta → falha detectada  
+**Tipo:** `Simple check`
+
+O item verifica se o serviço TCP da aplicação está acessível:
+
+* `1` → serviço disponível
+* `0` → serviço indisponível
+
+**Trigger:**
+
+`last(/App Web/net.tcp.service[tcp,app-web,80])=0`
+
+O trigger é acionado quando o último valor coletado pelo item é `0`, indicando indisponibilidade da aplicação.
+
+**Validação do item:**
+
+O item foi testado diretamente pelo recurso **Test** do Zabbix utilizando o servidor como origem da verificação:
+
+* Host address: `app-web`
+* Port: `80`
+* Test with: `Server`
+
+**Resultado:**
+
+`Result converted to Numeric (unsigned): 1`
+
+O resultado `1` confirmou a disponibilidade do serviço `app-web` na porta 80.
+
+**Teste de falha:**
+
+A indisponibilidade foi simulada interrompendo o container da aplicação:
+
+```powershell
+docker stop app-web
+```
+
+Após a coleta do novo valor, o item retornou `0` e o trigger foi acionado.
+
+**Resultado observado no Zabbix:**
+
+* Severity: `Disaster`
+* Status: `PROBLEM`
+* Trigger: `APP-01 - Aplicação indisponível`
+
+**Teste de recuperação:**
+
+Após a simulação da falha, o serviço foi restaurado:
+
+```powershell
+docker start app-web
+```
+
+Na coleta seguinte, o item voltou a retornar `1` e o trigger foi automaticamente encerrado.
+
+**Resultado observado:**
+
+* Severity: `Disaster`
+* Status: `OK`
+
+**Fluxo validado:**
+
+`app-web` disponível → `1` → **OK**
+
+`app-web` indisponível → `0` → **PROBLEM / Disaster**
+
+`app-web` restaurado → `1` → **OK**
+
 
 ---
 

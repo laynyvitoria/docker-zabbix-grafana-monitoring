@@ -1,178 +1,574 @@
-📄 Relatório de Execução (rascunho) — COMPLEMENTADO
+Sim. Vamos fazer \*\*primeiro a versão consolidada do Relatório de Execução\*\*, juntando tudo que já estava registrado + tudo que você realmente executou desde então. Depois usamos esse relatório como base para a documentação formal.
 
 
 
-criação das redes Docker (public-net, app-net, backend-net)
+Vou manter como \*\*relatório de execução\*\*, ou seja: cronológico, técnico e factual, sem transformar ainda em texto bonito de portfólio.
 
 
 
-definição da arquitetura do ambiente multi-serviços
+\## 📄 Relatório de Execução — Projeto de Monitoramento
 
 
 
-criação inicial do docker-compose.yml
+\### FASE 1 — INFRAESTRUTURA DO AMBIENTE
 
 
 
-subida dos containers (Nginx, App Web, Zabbix, PostgreSQL, Grafana)
+\* Criação das redes Docker:
 
 
 
-erro de variáveis de ambiente (containers não subiram corretamente)
+&#x20; \* `public-net`
 
+&#x20; \* `app-net`
 
+&#x20; \* `backend-net`
 
-análise de logs dos containers para identificar falhas
+\* Definição da arquitetura do ambiente multi-serviços.
 
+\* Criação inicial do `docker-compose.yml`.
 
+\* Subida dos serviços:
 
-correção do arquivo YAML (docker-compose.yml)
 
 
+&#x20; \* Nginx
 
-ajuste de variáveis de ambiente
+&#x20; \* App Web
 
+&#x20; \* Zabbix Server
 
+&#x20; \* Zabbix Web
 
-recriação completa do ambiente Docker
+&#x20; \* PostgreSQL
 
+&#x20; \* Grafana
 
+\* Identificação de erro inicial nas variáveis de ambiente que impedia a subida correta dos containers.
 
-validação da comunicação entre containers
+\* Análise dos logs dos containers para identificação das falhas.
 
+\* Correção do arquivo `docker-compose.yml`.
 
+\* Ajuste das variáveis de ambiente.
 
-teste de acesso ao Nginx (ponto de entrada do sistema)
+\* Recriação completa do ambiente Docker.
 
+\* Validação da comunicação entre os containers.
 
+\* Teste de acesso ao Nginx como ponto de entrada do sistema.
 
-verificação do funcionamento básico da App Web
+\* Verificação do funcionamento básico da App Web.
 
+\* Validação da conexão entre Zabbix e os serviços monitorados.
 
+\* Verificação do PostgreSQL como banco de persistência.
 
-validação da conexão entre Zabbix e serviços monitorados
+\* Acesso inicial ao Grafana.
 
+\* Organização inicial da estrutura de documentação no GitHub.
 
 
-verificação do PostgreSQL como base de persistência
 
+\### FASE 2 — PLANEJAMENTO DO MONITORAMENTO
 
 
-acesso inicial ao Grafana
 
+\* Definição dos SLAs do ambiente:
 
 
-organização inicial da estrutura para documentação (GitHub)
 
+&#x20; \* Website: 99%
 
+&#x20; \* Banco de Dados: 99%
 
-definição de SLAs do ambiente (Website 99%, Banco de Dados 99%, Monitoramento 95%)
+&#x20; \* Monitoramento: 95%
 
+\* Criação do catálogo de alertas.
 
+\* Classificação dos alertas por serviço, impacto e prioridade:
 
-criação do catálogo de alertas com identificação de serviços e severidades (P1, P2, P3)
 
 
+&#x20; \* P1
 
-estruturação inicial da implementação de monitoramento (Zabbix conceitual com itens, triggers e testes)
+&#x20; \* P2
 
+&#x20; \* P3
 
+\* Estruturação conceitual da implementação do monitoramento no Zabbix, incluindo hosts, itens, triggers e cenários de teste.
 
-diagnóstico e resolução do status unhealthy do container zabbix-web por tempo de espera de sincronismo com o banco de dados
 
 
+\### FASE 3 — VALIDAÇÃO E ESTABILIZAÇÃO DA INFRAESTRUTURA
 
-execução de testes de infraestrutura via terminal (PowerShell) validando o status de execução of todos os 6 containers (docker ps)
 
 
+\* Diagnóstico e resolução do status `unhealthy` do container `zabbix-web`, causado pelo tempo de espera de sincronização com o banco de dados.
 
-validação real de chamadas HTTP externas via curl.exe nas portas locais da aplicação (Borda Nginx na porta 80, Zabbix na 8080 e Grafana na 3000 com retorno 302 Found)
+\* Execução de testes de infraestrutura via PowerShell.
 
+\* Validação do status de execução dos containers através de `docker ps`.
 
+\* Validação de chamadas HTTP externas utilizando `curl.exe`:
 
-teste definitivo de redes internas do Docker rodando comandos de diagnóstico dentro dos containers (pg\_isready no PostgreSQL e requisição HTTP direta de dentro do container nginx para o app-web:80 retornando 200 OK)
 
 
+&#x20; \* Nginx — porta 80
 
-início da implementação prática no painel web do Zabbix com a abertura da tela de criação de hosts (Create host) para a aplicação App Web
+&#x20; \* Zabbix — porta 8080
 
+&#x20; \* Grafana — porta 3000
 
+\* Validação dos retornos HTTP, incluindo `302 Found` nos serviços que redirecionam para suas interfaces web.
 
-resolução de inconsistências de campos obrigatórios de rede (como o erro de DNS name vazio) e limpeza de templates de nuvens públicas não utilizados no escopo local
+\* Testes das redes internas do Docker.
 
+\* Validação do PostgreSQL através de `pg\_isready`.
 
+\* Validação da comunicação interna entre Nginx e App Web através de requisição HTTP direta dentro do container.
 
-criação do primeiro item de monitoramento HTTP no Zabbix para a App Web (HTTP agent apontando para \[http://app-web:80](http://app-web:80))
+\* Confirmação de resposta `HTTP 200 OK` entre os serviços internos.
 
 
 
-ajuste do tipo de informação do item para compatibilidade com retorno HTML (evitando erro de tipo numérico)
+\### FASE 4 — IMPLEMENTAÇÃO DO ZABBIX
 
 
 
-tentativa inicial incorreta de trigger usando last() para validar disponibilidade
+\#### App Web
 
 
 
-correção da lógica de monitoramento com uso de trigger baseada em ausência de dados (nodata)
+\* Criação do host `App Web`.
 
+\* Resolução de inconsistências nos campos obrigatórios da interface de rede.
 
+\* Limpeza de templates de nuvens públicas que não faziam parte do escopo do ambiente local.
 
-criação da trigger:
+\* Criação do monitoramento de disponibilidade do App Web.
 
+\* Configuração do item:
 
+
+
+```text
+
+APP-01 - Disponibilidade App Web
+
+net.tcp.service\[tcp,app-web,80]
+
+```
+
+
+
+\* Configuração da trigger:
+
+
+
+```text
 
 APP-01 - Aplicação fora do ar
 
-expressão: nodata(/App Web/app.web.check,1m)=1
+last(/App Web/net.tcp.service\[tcp,app-web,80])=0
+
+```
 
 
 
-validação funcional da trigger em cenário real de falha (docker stop app-web)
+\* Definição da severidade como \*\*Disaster/P1\*\*.
+
+\* Validação funcional da trigger com parada controlada do container `app-web`.
+
+\* Confirmação do disparo do evento em `Monitoring → Problems`.
+
+\* Reinicialização do container.
+
+\* Confirmação da recuperação automática do evento.
+
+\* Validação da comunicação entre Nginx e App Web após o restart.
 
 
 
-disparo do evento no Zabbix em Monitoring → Problems
+\#### APP-02 — Lentidão da aplicação
 
 
 
-validação de recuperação automática da trigger ao reiniciar o container (docker start app-web)
+\* Criação do Web Scenario:
 
 
 
-teste de comunicação entre Nginx e App Web após restart confirmando HTTP 200 OK
+```text
+
+APP-02 - Tempo de resposta do App Web
+
+```
 
 
 
-validação do comportamento do item em Monitoring → Latest data com retorno HTML correto da aplicação
+\* Configuração do step:
 
 
 
-ajuste e correção do monitoramento de host PostgreSQL no Zabbix (interface do host e consistência de comunicação com o agent)
+```text
+
+APP-02 - Requisição HTTP
+
+```
 
 
 
-validação da coleta de métricas via Zabbix agent (active checks habilitados para PostgreSQL)
+\* Configuração de requisição HTTP com retorno esperado `200`.
+
+\* Definição do limite de resposta para identificação de lentidão.
+
+\* Criação da trigger:
 
 
 
-confirmação de funcionamento do item de uso de disco (vfs.fs.size\[/,pused]) com atualização contínua em Latest data
+```text
+
+APP-02 - Lentidão da aplicação
+
+```
 
 
 
-correção do estado de disponibilidade do host (ZBX verde após estabilização do modo de coleta active)
+\* Definição da severidade como \*\*Warning/P2\*\*.
+
+\* Validação da coleta de tempo de resposta.
+
+\* Registro de eventos de lentidão e posterior recuperação.
 
 
 
-validação completa da comunicação Zabbix Server ↔ Zabbix Agent via zabbix\_get e agent.ping
+\#### PostgreSQL
 
 
 
-identificação e correção do comportamento de coleta (diferença entre passive checks e active checks no ambiente Docker)
+\* Criação/configuração do host `PostgreSQL`.
+
+\* Ajuste da interface do host e da comunicação com o Zabbix Agent.
+
+\* Validação da coleta de métricas utilizando Zabbix Agent.
+
+\* Identificação das diferenças entre passive checks e active checks no ambiente Docker.
+
+\* Configuração e estabilização da comunicação Zabbix Server ↔ Zabbix Agent.
+
+\* Validação através de `zabbix\_get` e `agent.ping`.
+
+\* Confirmação do estado `ZBX` após estabilização da coleta.
 
 
 
-estabilização final do monitoramento do PostgreSQL com métricas sendo coletadas corretamente em tempo real
+\#### DB-01 — Disponibilidade PostgreSQL
+
+
+
+\* Criação do item:
+
+
+
+```text
+
+DB-01 - Disponibilidade PostgreSQL
+
+net.tcp.service\[tcp,postgres,5432]
+
+```
+
+
+
+\* Configuração da trigger:
+
+
+
+```text
+
+DB-01 - Disponibilidade PostgreSQL
+
+last(/PostgreSQL/net.tcp.service\[tcp,postgres,5432])=0
+
+```
+
+
+
+\* Definição da severidade como \*\*High/P1\*\*.
+
+\* Validação funcional através de parada controlada do PostgreSQL.
+
+\* Registro do evento de indisponibilidade.
+
+\* Reinicialização do PostgreSQL.
+
+\* Confirmação da recuperação automática do evento.
+
+
+
+\#### DB-02 — Uso de disco PostgreSQL
+
+
+
+\* Criação do item:
+
+
+
+```text
+
+DB-02 - Uso de disco PostgreSQL
+
+vfs.fs.size\[/,pused]
+
+```
+
+
+
+\* Configuração como métrica numérica em percentual.
+
+\* Validação da atualização contínua em `Latest data`.
+
+\* Criação da trigger:
+
+
+
+```text
+
+DB-02 - Disco do PostgreSQL acima de 85%
+
+last(/PostgreSQL/vfs.fs.size\[/,pused])>85
+
+```
+
+
+
+\* Definição da severidade como \*\*Warning/P2\*\*.
+
+\* Validação da coleta com valor real de utilização do disco.
+
+
+
+\#### Nginx
+
+
+
+\* Configuração do monitoramento do host `Nginx`.
+
+\* Validação da configuração do serviço como ponto de entrada da aplicação.
+
+\* Criação do item:
+
+
+
+```text
+
+NGINX-01 - Disponibilidade Nginx
+
+net.tcp.service\[tcp,nginx,80]
+
+```
+
+
+
+\* Criação da trigger:
+
+
+
+```text
+
+NGINX-01 - Nginx indisponível
+
+last(/Nginx/net.tcp.service\[tcp,nginx,80])=0
+
+```
+
+
+
+\* Definição da severidade como \*\*Disaster/P1\*\*.
+
+\* Validação da coleta contínua do item.
+
+
+
+\#### MON-01 — Disponibilidade do Monitoramento
+
+
+
+\* Configuração do host `Zabbix server`.
+
+\* Criação do item:
+
+
+
+```text
+
+MON-01 - Disponibilidade do Monitoramento
+
+net.tcp.service\[tcp,zabbix-server,10051]
+
+```
+
+
+
+\* Configuração da coleta como `Simple check`.
+
+\* Validação do retorno numérico `1`.
+
+\* Criação/configuração da trigger de indisponibilidade do serviço de monitoramento.
+
+\* Definição da severidade como \*\*Warning/P3\*\*, por representar indisponibilidade da própria ferramenta de monitoramento sem caracterizar, diretamente, comprometimento da aplicação.
+
+
+
+\### FASE 5 — PERSISTÊNCIA E BACKUP
+
+
+
+\* Verificação do volume persistente utilizado pelo PostgreSQL.
+
+\* Confirmação do volume:
+
+
+
+```text
+
+docker-zabbix-grafana-monitoring\_pg\_data
+
+```
+
+
+
+\* Confirmação do destino:
+
+
+
+```text
+
+/var/lib/postgresql/data
+
+```
+
+
+
+\* Criação de backup do banco do Zabbix através de `pg\_dump`.
+
+\* Armazenamento do backup externamente ao diretório principal do projeto.
+
+\* Geração do arquivo:
+
+
+
+```text
+
+zabbix-backup-2026-09-14.sql
+
+```
+
+
+
+\* Validação do arquivo de backup.
+
+\* Preservação do backup como medida de segurança antes da continuidade das configurações de monitoramento e visualização.
+
+
+
+\### FASE 6 — INTEGRAÇÃO COM GRAFANA
+
+
+
+\* Acesso à interface web do Grafana.
+
+\* Identificação da necessidade de instalação do plugin de integração com Zabbix.
+
+\* Instalação do plugin:
+
+
+
+```text
+
+alexanderzobnin-zabbix-app
+
+versão 6.7.0
+
+```
+
+
+
+\* Confirmação da instalação através da CLI do Grafana.
+
+\* Configuração do datasource Zabbix no Grafana.
+
+\* Configuração da conexão com a API do Zabbix.
+
+\* Criação de credencial/token de API específico para integração.
+
+\* Correção da URL de acesso à API após identificação de erro inicial de endpoint.
+
+\* Validação da comunicação entre Grafana e Zabbix.
+
+\* Confirmação no Grafana da versão da API:
+
+
+
+```text
+
+Zabbix API version 7.4.12
+
+```
+
+
+
+\* Teste de consulta de dados do Zabbix através do Grafana.
+
+\* Criação do dashboard:
+
+
+
+```text
+
+Monitoramento de aplicação web
+
+```
+
+
+
+\* Adição dos painéis de:
+
+
+
+&#x20; \* NGINX-01 — Disponibilidade Nginx
+
+&#x20; \* APP-01 — Disponibilidade App Web
+
+&#x20; \* APP-02 — Tempo de resposta
+
+&#x20; \* DB-01 — Disponibilidade PostgreSQL
+
+&#x20; \* DB-02 — Uso de disco PostgreSQL
+
+&#x20; \* MON-01 — Disponibilidade do Monitoramento
+
+
+
+\### FASE 7 — SIMULAÇÃO E VALIDAÇÃO OPERACIONAL
+
+
+
+\* Execução de simulação real de indisponibilidade do App Web.
+
+\* Registro do evento no Zabbix.
+
+\* Validação da recuperação após reinicialização do serviço.
+
+\* Execução de simulação real de indisponibilidade do PostgreSQL.
+
+\* Registro do evento no Zabbix.
+
+\* Validação da recuperação após reinicialização do serviço.
+
+\* Verificação dos estados `PROBLEM` e `RESOLVED`.
+
+\* Validação da coleta das métricas após recuperação dos serviços.
 
 
 
@@ -180,47 +576,95 @@ estabilização final do monitoramento do PostgreSQL com métricas sendo coletad
 
 
 
-\* oq falta:
+\# ⏳ O QUE AINDA FALTA
 
 
 
-bld FASE 3 — Configurar ZABBIX
+\### FASE 8 — VALIDAÇÃO DE SLA
 
 
 
-(concluir a criação dos hosts App Web, Nginx e PostgreSQL, consolidar os itens de monitoramento e finalizar triggers APP-02, DB-01, DB-02, NGINX-01 e MON-01)
+\* Consolidar os SLAs definidos para Website, Banco de Dados e Monitoramento.
+
+\* Relacionar os eventos registrados aos impactos de disponibilidade.
+
+\* Documentar o método de avaliação dos SLAs.
 
 
 
-bld FASE 4 — SIMULAÇÃO DE FALHAS
+\### FASE 9 — TESTE COMPLETO / CICLO DE NOC
 
 
 
-(executar os comandos docker stop nos containers e monitorar a reação das triggers na aba Problems)
+\* Executar o fluxo operacional completo:
 
 
 
-bld FASE 5 — GRAFANA
+&#x20; \* detecção;
+
+&#x20; \* identificação do alerta;
+
+&#x20; \* análise;
+
+&#x20; \* registro do incidente;
+
+&#x20; \* ação de recuperação;
+
+&#x20; \* validação;
+
+&#x20; \* encerramento.
+
+\* Registrar evidências do ciclo.
 
 
 
-(instalação e conexão do datasource via API do Zabbix e montagem do dashboard com uptime, status e response time)
+\### FASE 10 — DOCUMENTAÇÃO FINAL
 
 
 
-bld FASE 6 — VALIDAR SLA
+\* Finalizar `implementacao-zabbix`.
+
+\* Finalizar `3-simulacao-plantao`.
+
+\* Finalizar `4-relatorio-execucao`.
+
+\* Revisar catálogo de alertas.
+
+\* Revisar documentação de SLAs.
+
+\* Atualizar README do GitHub.
+
+\* Organizar evidências do projeto.
 
 
 
-(criação dos serviços de TI no Zabbix/Grafana para cálculo de indisponibilidade e análise de impacto no negócio)
+\### FASE 11 — ENTREGA
 
 
 
-bld FASE 7 — TESTE COMPLETO
+\* Revisar arquivos do repositório.
+
+\* Verificar consistência entre documentação e implementação real.
+
+\* `git status`
+
+\* commit final.
+
+\* push para GitHub.
+
+\* Considerar a versão local do projeto encerrada antes da evolução para Terraform/AWS.
 
 
 
-(execução do ciclo completo de NOC do início ao fim com registro de incidente)
+\---
+
+
+
+\*\*Essa passa a ser a nossa base-mãe.\*\* Depois, quando formos documentar, não precisaremos ficar tentando lembrar “o que foi feito”: vamos extrair daqui as evidências, decisões técnicas, problemas encontrados, soluções e resultados.
+
+
+
+E eu manteria \*\*este relatório separado da documentação de portfólio\*\*. O relatório é o histórico técnico bruto; a documentação depois vai transformar isso em uma narrativa profissional muito mais limpa.
 
 
 

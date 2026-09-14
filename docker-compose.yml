@@ -22,6 +22,16 @@ services:
       - ./app:/usr/share/nginx/html
     networks:
       - app-net
+  
+  app-backend:
+    image: node:22-alpine
+    container_name: app-backend
+    working_dir: /app
+    volumes:
+      - ./app-backend:/app
+    command: sh -c "npm install && npm start"
+    networks:
+      - app-net
 
   postgres:
     image: postgres:15
