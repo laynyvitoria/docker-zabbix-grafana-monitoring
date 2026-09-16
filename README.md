@@ -8,17 +8,12 @@
 
 
 
-![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)
-
-![Zabbix](https://img.shields.io/badge/Zabbix-Monitoring-D40000?logo=zabbix&logoColor=white)
-
-![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)
-
-![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-009639?logo=nginx&logoColor=white)
-
-![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js&logoColor=white)
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
+![Zabbix](https://img.shields.io/badge/Zabbix-Monitoring-red)
+![Grafana](https://img.shields.io/badge/Grafana-Observability-orange)
+![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-green)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-brightgreen)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
 
 
 
