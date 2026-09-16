@@ -1,6 +1,6 @@
-````markdown
 
-\# Docker Zabbix Grafana Monitoring
+
+# Docker Zabbix Grafana Monitoring
 
 
 
@@ -22,11 +22,11 @@
 
 
 
-\---
+---
 
 
 
-\## 📋 Resumo executivo
+## 📋 Resumo executivo
 
 
 
@@ -66,11 +66,11 @@ O resultado é um ambiente que pode ser utilizado para praticar um fluxo operaci
 
 
 
-\---
+---
 
 
 
-\## 🎯 Visão geral
+## 🎯 Visão geral
 
 
 
@@ -86,49 +86,49 @@ O objetivo não foi apenas fazer os containers funcionarem, mas compreender a re
 
 
 
-\### Objetivos do laboratório
+### Objetivos do laboratório
 
 
 
-\- Praticar Docker e Docker Compose
+- Praticar Docker e Docker Compose
 
-\- Trabalhar com redes Docker e segmentação de serviços
+- Trabalhar com redes Docker e segmentação de serviços
 
-\- Compreender comunicação entre containers
+- Compreender comunicação entre containers
 
-\- Utilizar Nginx como reverse proxy
+- Utilizar Nginx como reverse proxy
 
-\- Integrar uma aplicação web a uma infraestrutura de monitoramento
+- Integrar uma aplicação web a uma infraestrutura de monitoramento
 
-\- Desenvolver um backend auxiliar para geração de cenários controlados
+- Desenvolver um backend auxiliar para geração de cenários controlados
 
-\- Trabalhar com persistência utilizando volumes Docker
+- Trabalhar com persistência utilizando volumes Docker
 
-\- Implementar monitoramento utilizando Zabbix
+- Implementar monitoramento utilizando Zabbix
 
-\- Utilizar Grafana para visualização
+- Utilizar Grafana para visualização
 
-\- Definir indicadores de SLA
+- Definir indicadores de SLA
 
-\- Criar um catálogo de alertas
+- Criar um catálogo de alertas
 
-\- Simular incidentes controlados
+- Simular incidentes controlados
 
-\- Praticar diagnóstico e recuperação
+- Praticar diagnóstico e recuperação
 
-\- Registrar evidências dos testes
+- Registrar evidências dos testes
 
-\- Documentar decisões técnicas
+- Documentar decisões técnicas
 
-\- Registrar aprendizados e pontos de evolução
-
-
-
-\---
+- Registrar aprendizados e pontos de evolução
 
 
 
-\## 🔎 O que este projeto demonstra
+---
+
+
+
+## 🔎 O que este projeto demonstra
 
 
 
@@ -136,97 +136,97 @@ Mais do que reunir diferentes tecnologias em um único `docker-compose.yml`, est
 
 
 
-\### 🖥️ Infraestrutura
+### 🖥️ Infraestrutura
 
 
 
-\- Docker
+- Docker
 
-\- Docker Compose
+- Docker Compose
 
-\- Containers
+- Containers
 
-\- Redes Docker
+- Redes Docker
 
-\- Segmentação de serviços
+- Segmentação de serviços
 
-\- Persistência de dados
+- Persistência de dados
 
-\- Volumes
+- Volumes
 
-\- Reverse proxy
-
-
-
-\### 💻 Aplicação
+- Reverse proxy
 
 
 
-\- Nginx
-
-\- Node.js
-
-\- Express
-
-\- API HTTP
-
-\- Health check
-
-\- Controle de latência
-
-\- Simulação de erros HTTP
+### 💻 Aplicação
 
 
 
-\### 📊 Monitoramento
+- Nginx
+
+- Node.js
+
+- Express
+
+- API HTTP
+
+- Health check
+
+- Controle de latência
+
+- Simulação de erros HTTP
 
 
 
-\- Zabbix Server
-
-\- Zabbix Web
-
-\- Zabbix Agent
-
-\- Coleta de métricas
-
-\- Triggers e alertas
-
-\- Indicadores de SLA
-
-\- Catálogo de alertas
-
-\- Grafana
+### 📊 Monitoramento
 
 
 
-\### 🚨 Operação
+- Zabbix Server
+
+- Zabbix Web
+
+- Zabbix Agent
+
+- Coleta de métricas
+
+- Triggers e alertas
+
+- Indicadores de SLA
+
+- Catálogo de alertas
+
+- Grafana
 
 
 
-\- Identificação de incidentes
-
-\- Recebimento de alertas
-
-\- Investigação
-
-\- Diagnóstico
-
-\- Intervenção
-
-\- Recuperação
-
-\- Registro de evidências
-
-\- Documentação pós-incidente
+### 🚨 Operação
 
 
 
-\---
+- Identificação de incidentes
+
+- Recebimento de alertas
+
+- Investigação
+
+- Diagnóstico
+
+- Intervenção
+
+- Recuperação
+
+- Registro de evidências
+
+- Documentação pós-incidente
 
 
 
-\# 🏗️ Arquitetura
+---
+
+
+
+# 🏗️ Arquitetura
 
 
 
@@ -246,95 +246,8 @@ A arquitetura final do laboratório foi organizada em três redes Docker:
 
 
 
-\### Arquitetura final
 
-
-
-!\[Arquitetura final](./1-arquitetura/diagrama-final.png)
-
-
-
-> O diagrama acima representa a arquitetura final após as etapas de implementação, testes e refinamento do laboratório.
-
-
-
-\### Visão geral dos fluxos
-
-
-
-```text
-
-&#x20;                             USUÁRIO
-
-&#x20;                                │
-
-&#x20;                                ▼
-
-&#x20;                        ┌───────────────┐
-
-&#x20;                        │     NGINX     │
-
-&#x20;                        │ Reverse Proxy │
-
-&#x20;                        └───────┬───────┘
-
-&#x20;                                │
-
-&#x20;                   ┌────────────┴────────────┐
-
-&#x20;                   │                         │
-
-&#x20;                   ▼                         ▼
-
-&#x20;            ┌─────────────┐          ┌──────────────┐
-
-&#x20;            │   APP WEB   │          │ APP BACKEND  │
-
-&#x20;            │    Nginx    │          │    Node.js   │
-
-&#x20;            └─────────────┘          └──────────────┘
-
-&#x20;                                            │
-
-&#x20;                                            ▼
-
-&#x20;                                 Cenários controlados
-
-&#x20;                                     de teste
-
-
-
-
-
-&#x20;                       ┌────────────────────────┐
-
-&#x20;                       │      MONITORAMENTO     │
-
-&#x20;                       │                        │
-
-&#x20;                       │        ZABBIX          │
-
-&#x20;                       │          │             │
-
-&#x20;                       │          ▼             │
-
-&#x20;                       │      POSTGRESQL        │
-
-&#x20;                       │                        │
-
-&#x20;                       │          │             │
-
-&#x20;                       │          ▼             │
-
-&#x20;                       │       GRAFANA          │
-
-&#x20;                       └────────────────────────┘
-
-```
-
-
-
-\### Comunicação por camada
+### Comunicação por camada
 
 
 
@@ -342,19 +255,19 @@ A arquitetura final do laboratório foi organizada em três redes Docker:
 
 ┌──────────────────────────────────────────────────────────────┐
 
-│                         public-net                           │
+│                         public-net                                                  │
 
-│                                                              │
+│                                                                                     │
 
-│                           Nginx                              │
+│                           Nginx                                                     │
 
-│                     Ponto de entrada                         │
-
+│                     Ponto de entrada                                                │
+ 
 └─────────────────────────────┬────────────────────────────────┘
 
-&#x20;                             │
+                                         │
 
-&#x20;                             │
+                                         │
 
 ┌─────────────────────────────▼────────────────────────────────┐
 
@@ -380,9 +293,9 @@ A arquitetura final do laboratório foi organizada em três redes Docker:
 
 └─────────────────────────────┬────────────────────────────────┘
 
-&#x20;                             │
+                                         │
 
-&#x20;                             │
+                                         │
 
 ┌─────────────────────────────▼────────────────────────────────┐
 
@@ -416,15 +329,15 @@ A configuração detalhada da arquitetura, das redes e dos fluxos de comunicaç�
 
 
 
-\*\*→ \[Documentação de arquitetura e topologia](./1-arquitetura/)\*\*
+*\*→ \[Documentação de arquitetura e topologia](./1-arquitetura/)\*\*
 
 
 
-\---
+---
 
 
 
-\# 🔄 Evolução da arquitetura
+# 🔄 Evolução da arquitetura
 
 
 
@@ -440,17 +353,17 @@ Esse processo permitiu compreender na prática:
 
 
 
-\- quais componentes eram necessários;
+- quais componentes eram necessários;
 
-\- quais responsabilidades pertenciam a cada serviço;
+- quais responsabilidades pertenciam a cada serviço;
 
-\- quais serviços precisavam se comunicar;
+- quais serviços precisavam se comunicar;
 
-\- como organizar os componentes em diferentes redes;
+- como organizar os componentes em diferentes redes;
 
-\- como representar os fluxos de comunicação;
+- como representar os fluxos de comunicação;
 
-\- quais decisões precisavam ser revistas durante a implementação.
+- quais decisões precisavam ser revistas durante a implementação.
 
 
 
@@ -458,15 +371,15 @@ As versões anteriores dos diagramas fazem parte da documentação do processo e
 
 
 
-\*\*→ \[Ver evolução da arquitetura](./1-arquitetura/)\*\*
+*\*→ \[Ver evolução da arquitetura](./1-arquitetura/)\*\*
 
 
 
-\---
+---
 
 
 
-\# 🧩 Componentes
+# 🧩 Componentes
 
 
 
@@ -492,11 +405,11 @@ As versões anteriores dos diagramas fazem parte da documentação do processo e
 
 
 
-\---
+---
 
 
 
-\# ⚙️ Decisões técnicas
+# ⚙️ Decisões técnicas
 
 
 
@@ -504,7 +417,7 @@ Durante a construção do laboratório, algumas decisões foram tomadas para org
 
 
 
-\## Segmentação por redes
+## Segmentação por redes
 
 
 
@@ -516,9 +429,9 @@ Os serviços foram distribuídos entre diferentes redes Docker para separar os p
 
 public-net
 
-&#x20;   │
+   │
 
-&#x20;   └── Nginx
+   └── Nginx
 
 
 
@@ -526,17 +439,17 @@ public-net
 
 app-net
 
-&#x20;   │
+   │
 
-&#x20;   ├── Nginx
+   ├── Nginx
 
-&#x20;   ├── App Web
+   ├── App Web
 
-&#x20;   ├── App Backend
+   ├── App Backend
 
-&#x20;   ├── Zabbix Server
+   ├── Zabbix Server
 
-&#x20;   └── Zabbix Web
+   └── Zabbix Web
 
 
 
@@ -544,17 +457,17 @@ app-net
 
 backend-net
 
-&#x20;   │
+   │
 
-&#x20;   ├── PostgreSQL
+   ├── PostgreSQL
 
-&#x20;   ├── Zabbix Server
+   ├── Zabbix Server
 
-&#x20;   ├── Zabbix Web
+   ├── Zabbix Web
 
-&#x20;   ├── Zabbix Agent
+   ├── Zabbix Agent
 
-&#x20;   └── Grafana
+   └── Grafana
 
 ```
 
@@ -568,11 +481,11 @@ A configuração detalhada está disponível na documentação da arquitetura.
 
 
 
-\---
+---
 
 
 
-\## Nginx como reverse proxy
+## Nginx como reverse proxy
 
 
 
@@ -598,11 +511,11 @@ Dessa forma, o acesso externo à aplicação passa pelo Nginx, enquanto o fronte
 
 
 
-\---
+---
 
 
 
-\## Backend auxiliar
+## Backend auxiliar
 
 
 
@@ -618,13 +531,13 @@ O backend possui endpoints específicos para:
 
 
 
-\- verificar a saúde da aplicação;
+- verificar a saúde da aplicação;
 
-\- gerar respostas normais;
+- gerar respostas normais;
 
-\- introduzir atraso controlado;
+- introduzir atraso controlado;
 
-\- produzir erros HTTP 500.
+- produzir erros HTTP 500.
 
 
 
@@ -636,11 +549,11 @@ O backend deixou de ser apenas uma aplicação de apoio e passou a funcionar com
 
 
 
-\---
+---
 
 
 
-\## Persistência
+## Persistência
 
 
 
@@ -652,7 +565,7 @@ O PostgreSQL utiliza um volume Docker para persistência:
 
 volumes:
 
-&#x20; pg\_data:
+ pg\_data:
 
 ```
 
@@ -670,11 +583,11 @@ A partir dessa experiência, a documentação passou a registrar o comportamento
 
 
 
-\---
+---
 
 
 
-\# 📊 Monitoramento
+# 📊 Monitoramento
 
 
 
@@ -706,11 +619,11 @@ A documentação foi organizada em três partes principais:
 
 
 
-\---
+---
 
 
 
-\## 📏 SLAs
+## 📏 SLAs
 
 
 
@@ -722,15 +635,15 @@ A definição dos indicadores serve como referência para interpretar o comporta
 
 
 
-\*\*→ \[Documentação dos SLAs](./2-monitoramento/1-slas/)\*\*
+*\*→ \[Documentação dos SLAs](./2-monitoramento/1-slas/)\*\*
 
 
 
-\---
+---
 
 
 
-\## 🔔 Catálogo de alertas
+## 🔔 Catálogo de alertas
 
 
 
@@ -742,29 +655,29 @@ O catálogo registra, conforme aplicável:
 
 
 
-\- condição monitorada;
+- condição monitorada;
 
-\- serviço relacionado;
+- serviço relacionado;
 
-\- gatilho;
+- gatilho;
 
-\- severidade;
+- severidade;
 
-\- comportamento esperado;
+- comportamento esperado;
 
-\- resposta associada ao cenário.
-
-
-
-\*\*→ \[Catálogo de alertas](./2-monitoramento/2-catalogo-alertas/)\*\*
+- resposta associada ao cenário.
 
 
 
-\---
+*\*→ \[Catálogo de alertas](./2-monitoramento/2-catalogo-alertas/)\*\*
 
 
 
-\## 🖥️ Implementação do Zabbix
+---
+
+
+
+## 🖥️ Implementação do Zabbix
 
 
 
@@ -776,15 +689,15 @@ Essa documentação apresenta as configurações utilizadas para coleta, monitor
 
 
 
-\*\*→ \[Implementação do Zabbix](./2-monitoramento/3-zabbix/)\*\*
+*\*→ \[Implementação do Zabbix](./2-monitoramento/3-zabbix/)\*\*
 
 
 
-\---
+---
 
 
 
-\# 🚨 Simulação de incidentes
+# 🚨 Simulação de incidentes
 
 
 
@@ -804,9 +717,9 @@ O fluxo praticado é:
 
 └──────┬───────┘
 
-&#x20;      │
+          │
 
-&#x20;      ▼
+          ▼
 
 ┌──────────────┐
 
@@ -814,9 +727,9 @@ O fluxo praticado é:
 
 └──────┬───────┘
 
-&#x20;      │
+          │
 
-&#x20;      ▼
+          ▼
 
 ┌──────────────┐
 
@@ -824,9 +737,9 @@ O fluxo praticado é:
 
 └──────┬───────┘
 
-&#x20;      │
+          │
 
-&#x20;      ▼
+          ▼
 
 ┌──────────────┐
 
@@ -834,9 +747,9 @@ O fluxo praticado é:
 
 └──────┬───────┘
 
-&#x20;      │
+         │
 
-&#x20;      ▼
+         ▼
 
 ┌──────────────┐
 
@@ -856,37 +769,37 @@ Cada incidente pode ser documentado considerando:
 
 
 
-\- cenário;
+- cenário;
 
-\- condição inicial;
+- condição inicial;
 
-\- comportamento esperado;
+- comportamento esperado;
 
-\- comportamento observado;
+- comportamento observado;
 
-\- alerta gerado;
+- alerta gerado;
 
-\- investigação;
+- investigação;
 
-\- diagnóstico;
+- diagnóstico;
 
-\- ação realizada;
+- ação realizada;
 
-\- resultado;
+- resultado;
 
-\- evidências.
-
-
-
-\*\*→ \[Ver simulações de incidentes](./3-incidentes/)\*\*
+- evidências.
 
 
 
-\---
+*\*→ \[Ver simulações de incidentes](./3-simulação-de-incidentes/)\*\*
 
 
 
-\# 🧪 Cenários de teste
+---
+
+
+
+# 🧪 Cenários de teste
 
 
 
@@ -968,11 +881,11 @@ Esse endpoint permite criar condições controladas para observar o comportament
 
 
 
-\---
+---
 
 
 
-\## Simulação de erro HTTP 500
+## Simulação de erro HTTP 500
 
 
 
@@ -996,9 +909,9 @@ Exemplo:
 
 {
 
-&#x20; "status": "ERROR",
+ "status": "ERROR",
 
-&#x20; "message": "Erro interno simulado para teste de monitoramento"
+ "message": "Erro interno simulado para teste de monitoramento"
 
 }
 
@@ -1034,51 +947,25 @@ A experiência permitiu observar, na prática, a diferença entre:
 
 
 
-\- executar novamente os serviços;
+- executar novamente os serviços;
 
-\- recuperar a infraestrutura;
+- recuperar a infraestrutura;
 
-\- recuperar os dados;
+- recuperar os dados;
 
-\- possuir uma estratégia de backup;
+- possuir uma estratégia de backup;
 
-\- possuir uma estratégia de recuperação.
-
-
-
-A partir desse episódio, a persistência passou a ser tratada como uma parte importante da documentação do projeto.
+- possuir uma estratégia de recuperação.
 
 
 
-O registro inclui:
+
+
+---
 
 
 
-\- contexto do problema;
-
-\- comportamento observado;
-
-\- impacto;
-
-\- reconstrução;
-
-\- recuperação;
-
-\- aprendizados;
-
-\- pontos de evolução.
-
-
-
-\*\*→ \[Ver documentação de persistência e recuperação](./4-persistencia-recuperacao/)\*\*
-
-
-
-\---
-
-
-
-\# 📁 Estrutura do projeto
+# 📁 Estrutura do projeto
 
 
 
@@ -1090,25 +977,25 @@ docker-zabbix-grafana-monitoring/
 
 ├── 1-arquitetura/
 
-│   ├── diagramas/
+│   ├── Multi-Service Environment Monitoring-v7vf.png/
 
-│   └── README.md
+│   └── README.md/
 
 │
 
 ├── 2-monitoramento/
 
-│   ├── 1-slas/
+│   ├── 1-slas/README.md
 
-│   ├── 2-catalogo-alertas/
+│   ├── 2-catalogo-alertas/README.md
 
-│   ├── 3-zabbix/
+│   ├── 3-zabbix/README.md
 
-│   └── README.md
+│   
 
 │
 
-├── 3-incidentes/
+├── 3-simulação-de-incidentes/
 
 │   ├── incidente-01/
 
@@ -1118,9 +1005,9 @@ docker-zabbix-grafana-monitoring/
 
 │
 
-├── 4-persistencia-recuperacao/
+├── 4-relatorio-de-execução/
 
-│   └── README.md
+│   └── 
 
 │
 
@@ -1160,11 +1047,11 @@ docker-zabbix-grafana-monitoring/
 
 
 
-\# 🔧 Como executar
+# 🔧 Como executar
 
 
 
-\## Pré-requisitos
+## Pré-requisitos
 
 
 
@@ -1172,25 +1059,23 @@ Antes de iniciar o ambiente, é necessário possuir:
 
 
 
-\- Docker
+- Docker
 
-\- Docker Compose
-
-\- Git
+- Git
 
 
 
-\---
+---
 
 
 
-\## 1. Clone o repositório
+## 1. Clone o repositório
 
 
 
 ```bash
 
-git clone <URL\_DO\_REPOSITORIO>
+git clone <https://github.com/laynyvitoria/docker-zabbix-grafana-monitoring.git>
 
 cd docker-zabbix-grafana-monitoring
 
@@ -1198,11 +1083,11 @@ cd docker-zabbix-grafana-monitoring
 
 
 
-\---
+---
 
 
 
-\## 2. Configure as variáveis de ambiente
+## 2. Configure as variáveis de ambiente
 
 
 
@@ -1226,11 +1111,11 @@ Preencha as variáveis necessárias antes de iniciar o ambiente.
 
 
 
-\---
+---
 
 
 
-\## 3. Inicie os serviços
+## 3. Inicie os serviços
 
 
 
@@ -1242,11 +1127,11 @@ docker compose up -d
 
 
 
-\---
+---
 
 
 
-\## 4. Verifique o estado dos containers
+## 4. Verifique o estado dos containers
 
 
 
@@ -1262,7 +1147,7 @@ docker compose ps
 
 
 
-\## 5. Consulte os logs
+## 5. Consulte os logs
 
 
 
@@ -1290,11 +1175,11 @@ docker compose logs -f <nome-do-servico>
 
 
 
-\---
+---
 
 
 
-\## 6. Encerre o ambiente
+## 6. Encerre o ambiente
 
 
 
@@ -1310,11 +1195,11 @@ docker compose down
 
 
 
-\---
+---
 
 
 
-\# 🌐 Acesso aos serviços
+# 🌐 Acesso aos serviços
 
 
 
@@ -1334,59 +1219,12 @@ Após a inicialização do ambiente, os principais serviços podem ser acessados
 
 
 
-\---
+---
 
 
 
-\# 📸 Evidências e resultados
 
-
-
-As evidências do projeto foram utilizadas para registrar o comportamento do ambiente durante a implementação, os testes e as simulações.
-
-
-
-O objetivo das evidências é demonstrar não apenas que os serviços estavam funcionando, mas também registrar o processo de observação, investigação e recuperação.
-
-
-
-Entre os registros estão:
-
-
-
-\- arquitetura;
-
-\- topologia;
-
-\- configuração dos serviços;
-
-\- telas do Zabbix;
-
-\- dashboards do Grafana;
-
-\- alertas;
-
-\- cenários de teste;
-
-\- incidentes;
-
-\- ações realizadas;
-
-\- recuperação;
-
-\- resultados.
-
-
-
-\*\*→ \[Ver evidências do projeto](./evidencias/)\*\*
-
-
-
-\---
-
-
-
-\# 🧠 Aprendizados
+# 🧠 Aprendizados
 
 
 
@@ -1402,35 +1240,34 @@ Ao longo da implementação, conceitos inicialmente estudados de forma separada 
 
 Docker
 
-&#x20;  ↓
+  ↓
 
 Redes
 
-&#x20;  ↓
+  ↓
 
 Aplicação
 
-&#x20;  ↓
+  ↓
 
 Monitoramento
 
-&#x20;  ↓
+  ↓
 
 Alertas
 
-&#x20;  ↓
+  ↓
 
 Incidentes
 
-&#x20;  ↓
+  ↓
 
 Diagnóstico
-
-&#x20;  ↓
+  ↓
 
 Recuperação
 
-&#x20;  ↓
+  ↓
 
 Documentação
 
@@ -1446,27 +1283,27 @@ Também é necessário compreender:
 
 
 
-\- como os componentes se comunicam;
+- como os componentes se comunicam;
 
-\- quais responsabilidades pertencem a cada camada;
+- quais responsabilidades pertencem a cada camada;
 
-\- como organizar os serviços;
+- como organizar os serviços;
 
-\- como detectar comportamentos anormais;
+- como detectar comportamentos anormais;
 
-\- como interpretar alertas;
+- como interpretar alertas;
 
-\- como investigar uma falha;
+- como investigar uma falha;
 
-\- como executar uma intervenção;
+- como executar uma intervenção;
 
-\- como validar uma recuperação;
+- como validar uma recuperação;
 
-\- como preservar os dados;
+- como preservar os dados;
 
-\- como registrar o que aconteceu;
+- como registrar o que aconteceu;
 
-\- quais mecanismos precisam existir para reduzir o impacto de novas falhas.
+- quais mecanismos precisam existir para reduzir o impacto de novas falhas.
 
 
 
@@ -1478,11 +1315,11 @@ O problema deixou de ser apenas uma dificuldade de implementação e passou a re
 
 
 
-\---
+---
 
 
 
-\# 🔗 Integração entre desenvolvimento, infraestrutura e operação
+# 🔗 Integração entre desenvolvimento, infraestrutura e operação
 
 
 
@@ -1510,35 +1347,15 @@ Dessa forma, o projeto conecta diferentes áreas:
 
 ┌─────────────────────────┐
 
-│     DESENVOLVIMENTO     │
+│     DESENVOLVIMENTO              │
 
-│                         │
+│                                  │
 
-│ Node.js                 │
+│ Node.js                          │
 
-│ API                     │
+│ API                              │
 
-│ HTTP                    │
-
-└────────────┬────────────┘
-
-&#x20;            │
-
-&#x20;            ▼
-
-┌─────────────────────────┐
-
-│     INFRAESTRUTURA      │
-
-│                         │
-
-│ Docker                  │
-
-│ Redes                   │
-
-│ Nginx                   │
-
-│ PostgreSQL              │
+│ HTTP                             │
 
 └────────────┬────────────┘
 
@@ -1548,19 +1365,39 @@ Dessa forma, o projeto conecta diferentes áreas:
 
 ┌─────────────────────────┐
 
-│       OPERAÇÃO          │
+│     INFRAESTRUTURA               │
 
-│                         │
+│                                  │
 
-│ Zabbix                  │
+│ Docker                           │
 
-│ Grafana                 │
+│ Redes                            │
 
-│ Alertas                 │
+│ Nginx                            │
 
-│ Incidentes              │
+│ PostgreSQL                       │
 
-│ Recuperação             │
+└────────────┬────────────┘
+
+                  │
+
+                  ▼
+
+┌─────────────────────────┐
+
+│       OPERAÇÃO                   │
+
+│                                  │
+
+│ Zabbix                           │
+
+│ Grafana                          │
+
+│ Alertas                          │
+
+│ Incidentes                       │
+
+│ Recuperação                      │
 
 └─────────────────────────┘
 
@@ -1572,7 +1409,7 @@ Essa integração permite enxergar o ambiente como um sistema, em vez de tratar 
 
 
 
-\---
+---
 
 
 
@@ -1586,49 +1423,48 @@ O laboratório foi estruturado para permitir a prática de um fluxo operacional 
 
 ```text
 
-1\. GERAR OU REPRODUZIR CONDIÇÃO
+1. GERAR OU REPRODUZIR CONDIÇÃO
 
-&#x20;               │
+               │
 
-&#x20;               ▼
+               ▼
 
-2\. OBSERVAR O COMPORTAMENTO
+2. OBSERVAR O COMPORTAMENTO
 
-&#x20;               │
+               │
 
-&#x20;               ▼
+               ▼
 
-3\. IDENTIFICAR O ALERTA
+3. IDENTIFICAR O ALERTA
 
-&#x20;               │
+               │
+               ▼
 
-&#x20;               ▼
+4. INVESTIGAR
 
-4\. INVESTIGAR
+               │
 
-&#x20;               │
+               ▼
 
-&#x20;               ▼
+5. DIAGNOSTICAR
 
-5\. DIAGNOSTICAR
+               │
 
-&#x20;               │
+               ▼
 
-&#x20;               ▼
+6. EXECUTAR AÇÃO
 
-6\. EXECUTAR AÇÃO
+               │
 
-&#x20;               │
+               ▼
 
-&#x20;               ▼
+7. VALIDAR A RECUPERAÇÃO
 
-7\. VALIDAR A RECUPERAÇÃO
+               │
 
-&#x20;               │
+               ▼
 
-&#x20;               ▼
-
-8\. REGISTRAR EVIDÊNCIAS
+8. REGISTRAR EVIDÊNCIAS
 
 ```
 
@@ -1638,45 +1474,11 @@ Esse fluxo aproxima o laboratório de uma rotina de operação e monitoramento, 
 
 
 
-\---
+---
 
 
 
-\# 📚 Documentação
-
-
-
-A documentação foi dividida por áreas para evitar concentrar todas as informações em um único arquivo.
-
-
-
-| Área | Conteúdo |
-
-|---|---|
-
-| \[Arquitetura](./1-arquitetura/) | Diagramas, topologia, redes e evolução |
-
-| \[Monitoramento](./2-monitoramento/) | SLAs, alertas e implementação do Zabbix |
-
-| \[Incidentes](./3-incidentes/) | Simulações, diagnósticos, ações e evidências |
-
-| \[Persistência e recuperação](./4-persistencia-recuperacao/) | Perda de persistência, reconstrução e aprendizados |
-
-
-
-Este README funciona como a \*\*porta de entrada do projeto\*\*.
-
-
-
-A documentação detalhada permanece organizada dentro de cada área, evitando duplicação de conteúdo e permitindo consultar cada assunto separadamente.
-
-
-
-\---
-
-
-
-\# 🗺️ Mapa do projeto
+# 🗺️ Mapa do projeto
 
 
 
@@ -1736,13 +1538,13 @@ Docker Zabbix Grafana Monitoring
 
 └── Execução
 
-&#x20;   ├── Docker Compose
+   ├── Docker Compose
 
-&#x20;   ├── Aplicação
+   ├── Aplicação
 
-&#x20;   ├── Zabbix
+   ├── Zabbix
 
-&#x20;   └── Grafana
+   └── Grafana
 
 ```
 
@@ -1752,283 +1554,7 @@ Docker Zabbix Grafana Monitoring
 
 
 
-\# 🔮 Próxima evolução
-
-
-
-Este laboratório representa a \*\*primeira etapa\*\* de uma evolução maior.
-
-
-
-A próxima etapa partirá da mesma base conceitual, mas terá um novo objetivo: evoluir a infraestrutura local para um ambiente automatizado em \*\*AWS\*\*.
-
-
-
-A proposta futura é explorar conceitos como:
-
-
-
-\- AWS;
-
-\- Terraform;
-
-\- Infrastructure as Code;
-
-\- automação;
-
-\- provisionamento de infraestrutura;
-
-\- CI/CD;
-
-\- gerenciamento de configuração;
-
-\- observabilidade em ambiente de nuvem.
-
-
-
-A intenção não é simplesmente copiar este projeto para a AWS.
-
-
-
-O objetivo será utilizar o conhecimento adquirido neste laboratório para compreender:
-
-
-
-\*\*o que precisa ser automatizado, o que precisa ser provisionado como código e como transformar uma infraestrutura construída manualmente em uma infraestrutura reproduzível.\*\*
-
-
-
-\### Evolução planejada
-
-
-
-```text
-
-&#x20;                      PROJETO 1
-
-&#x20;               INFRAESTRUTURA LOCAL
-
-&#x20;                        │
-
-&#x20;                        ▼
-
-&#x20;             ┌──────────────────────┐
-
-&#x20;             │       Docker         │
-
-&#x20;             │        Redes         │
-
-&#x20;             │      Aplicação       │
-
-&#x20;             │    Monitoramento     │
-
-&#x20;             │       Alertas        │
-
-&#x20;             │      Incidentes      │
-
-&#x20;             │      Recuperação     │
-
-&#x20;             └──────────┬───────────┘
-
-&#x20;                        │
-
-&#x20;                        │
-
-&#x20;                        ▼
-
-&#x20;                      PROJETO 2
-
-&#x20;              INFRAESTRUTURA EM AWS
-
-&#x20;                        │
-
-&#x20;                        ▼
-
-&#x20;             ┌──────────────────────┐
-
-&#x20;             │         AWS          │
-
-&#x20;             │      Terraform       │
-
-&#x20;             │         IaC          │
-
-&#x20;             │      Automação       │
-
-&#x20;             │        CI/CD         │
-
-&#x20;             │   Observabilidade    │
-
-&#x20;             └──────────────────────┘
-
-```
-
-
-
-> \*\*Projeto 1:\*\* construir, entender, monitorar e operar.
-
->
-
-> \*\*Projeto 2:\*\* automatizar, provisionar e evoluir.
-
-
-
-O segundo projeto ainda está em fase de planejamento. A arquitetura final, os serviços AWS e as ferramentas adicionais serão definidos posteriormente, conforme os conhecimentos adquiridos nesta primeira etapa.
-
-
-
-\---
-
-
-
-\# 🧱 Da infraestrutura manual à Infrastructure as Code
-
-
-
-O principal objetivo da próxima evolução será transformar o conhecimento obtido na construção manual deste laboratório em capacidade de projetar e automatizar infraestrutura.
-
-
-
-A progressão planejada é:
-
-
-
-```text
-
-CONSTRUIR
-
-&#x20;   ↓
-
-ENTENDER
-
-&#x20;   ↓
-
-MONITORAR
-
-&#x20;   ↓
-
-OPERAR
-
-&#x20;   ↓
-
-DOCUMENTAR
-
-&#x20;   ↓
-
-AUTOMATIZAR
-
-&#x20;   ↓
-
-PROVISIONAR COMO CÓDIGO
-
-&#x20;   ↓
-
-EVOLUIR PARA CLOUD
-
-```
-
-
-
-Isso significa que o segundo projeto não será tratado como um laboratório completamente separado.
-
-
-
-Ele deverá partir das decisões e dos aprendizados deste ambiente e explorar como essas mesmas necessidades podem ser resolvidas através de automação e Infrastructure as Code.
-
-
-
-\---
-
-
-
-\# 📌 Status do projeto
-
-
-
-\## ✅ Implementado
-
-
-
-\- \[x] Arquitetura conteinerizada
-
-\- \[x] Docker Compose
-
-\- \[x] Segmentação por redes Docker
-
-\- \[x] Aplicação web
-
-\- \[x] Backend auxiliar
-
-\- \[x] Nginx como reverse proxy
-
-\- \[x] PostgreSQL
-
-\- \[x] Persistência com volume Docker
-
-\- \[x] Zabbix Server
-
-\- \[x] Zabbix Web
-
-\- \[x] Zabbix Agent
-
-\- \[x] Grafana
-
-\- \[x] Definição de SLAs
-
-\- \[x] Catálogo de alertas
-
-\- \[x] Cenários controlados de teste
-
-\- \[x] Simulação de incidentes
-
-\- \[x] Registro de evidências
-
-\- \[x] Documentação da arquitetura
-
-\- \[x] Documentação das decisões técnicas
-
-\- \[x] Documentação dos aprendizados
-
-
-
-\## 🚧 Em finalização
-
-
-
-\- \[ ] Consolidação da documentação final
-
-\- \[ ] Revisão das evidências
-
-\- \[ ] Publicação da versão final do projeto
-
-
-
-\## 🔮 Próxima etapa
-
-
-
-\*\*Projeto 2 — evolução para infraestrutura automatizada em AWS\*\*
-
-
-
-\- Terraform
-
-\- Infrastructure as Code
-
-\- Automação
-
-\- CI/CD
-
-\- Provisionamento em nuvem
-
-\- Evolução da observabilidade
-
-
-
-\---
-
-
-
-\# 🎓 O que este laboratório representa
+# 🎓 O que este laboratório representa
 
 
 
@@ -2040,7 +1566,7 @@ A proposta foi sair da teoria e construir um ambiente no qual fosse possível:
 
 
 
-\*\*construir → testar → observar → quebrar → investigar → recuperar → documentar → evoluir\*\*
+*\*construir → testar → observar → quebrar → investigar → recuperar → documentar → evoluir\*\*
 
 
 
@@ -2059,12 +1585,11 @@ Por isso, o resultado deste laboratório não é apenas um conjunto de container
 É também o registro de um processo de evolução.
 
 
-
-\---
-
+---
 
 
-\# 🧠 Principais aprendizados
+
+# 🧠 Principais aprendizados
 
 
 
@@ -2072,87 +1597,87 @@ Ao finalizar este laboratório, os principais conceitos trabalhados foram:
 
 
 
-\### Infraestrutura
+### Infraestrutura
 
 
 
-\- Containerização
+- Containerização
 
-\- Docker Compose
+- Docker Compose
 
-\- Redes Docker
+- Redes Docker
 
-\- Comunicação entre containers
+- Comunicação entre containers
 
-\- Persistência
+- Persistência
 
-\- Reverse proxy
+- Reverse proxy
 
-\- Organização de serviços
-
-
-
-\### Monitoramento
+- Organização de serviços
 
 
 
-\- Zabbix
-
-\- Agentes
-
-\- Coleta
-
-\- Triggers
-
-\- Alertas
-
-\- SLAs
-
-\- Visualização com Grafana
+### Monitoramento
 
 
 
-\### Operação
+- Zabbix
+
+- Agentes
+
+- Coleta
+
+- Triggers
+
+- Alertas
+
+- SLAs
+
+- Visualização com Grafana
 
 
 
-\- Observação do ambiente
-
-\- Identificação de incidentes
-
-\- Diagnóstico
-
-\- Intervenção
-
-\- Recuperação
-
-\- Registro de evidências
+### Operação
 
 
 
-\### Engenharia de ambiente
+- Observação do ambiente
+
+- Identificação de incidentes
+
+- Diagnóstico
+
+- Intervenção
+
+- Recuperação
+
+- Registro de evidências
 
 
 
-\- Separação de responsabilidades
-
-\- Evolução arquitetural
-
-\- Testes controlados
-
-\- Documentação técnica
-
-\- Pensamento orientado a falhas
-
-\- Identificação de necessidades de recuperação
+### Engenharia de ambiente
 
 
 
-\---
+- Separação de responsabilidades
+
+- Evolução arquitetural
+
+- Testes controlados
+
+- Documentação técnica
+
+- Pensamento orientado a falhas
+
+- Identificação de necessidades de recuperação
 
 
 
-\# 🚀 Continuação
+---
+
+
+
+# 🚀 Continuação
 
 
 
@@ -2160,45 +1685,12 @@ Este projeto representa o primeiro passo de uma sequência de laboratórios volt
 
 
 
-```text
-
-&#x20;                PROJETO 1
-
-&#x20;         Construir e operar
-
-&#x20;                │
-
-&#x20;                ▼
-
-&#x20;                🚀
-
-&#x20;                │
-
-&#x20;                ▼
-
-&#x20;                PROJETO 2
-
-&#x20;       Automatizar e provisionar
-
-&#x20;                │
-
-&#x20;                ▼
-
-&#x20;             AWS + IaC
-
-```
-
-
 
 A construção deste primeiro ambiente fornece a base conceitual para a próxima etapa: entender como os componentes que hoje são configurados e executados localmente podem ser transformados em uma infraestrutura automatizada, reproduzível e provisionada através de código.
 
+---
 
-
-\---
-
-
-
-\# 👩‍💻 Sobre o projeto
+# 👩‍💻 Sobre o projeto
 
 
 
@@ -2218,11 +1710,11 @@ O objetivo é continuar evoluindo essa base até chegar a ambientes cada vez mai
 
 
 
-\---
+---
 
 
 
-\# 📌 Em uma frase
+# 📌 Em uma frase
 
 
 
@@ -2230,15 +1722,15 @@ O objetivo é continuar evoluindo essa base até chegar a ambientes cada vez mai
 
 
 
-\---
+---
 
 
 
-\## 💎 Projeto 1
+## 💎 Projeto 1
 
 
 
-\*\*Docker Zabbix Grafana Monitoring\*\*
+*\*Docker Zabbix Grafana Monitoring\*\*
 
 
 
@@ -2252,15 +1744,15 @@ Operar.
 
 
 
-\### ↓
+### ↓
 
 
 
-\## ☁️ Projeto 2
+## ☁️ Projeto 2
 
 
 
-\*\*Infraestrutura automatizada em AWS\*\*
+*\*Infraestrutura automatizada em AWS\*\*
 
 
 
