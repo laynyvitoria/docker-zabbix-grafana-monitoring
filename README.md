@@ -46,154 +46,193 @@ Arquitetura do ambiente
 A especificação da arquitetura, incluindo a divisão das redes, componentes e fluxos de comunicação, está documentada em:
 📂 `1-arquitetura`
 
-📊 Monitoramento e observabilidade
-O monitoramento do ambiente é realizado pelo Zabbix, responsável pela coleta de dados e avaliação das condições dos serviços.
-O Grafana é utilizado como camada de visualização, permitindo acompanhar indicadores de disponibilidade e desempenho do ambiente.
-Entre os serviços monitorados estão:
-Nginx;
-App Web;
-PostgreSQL;
-Zabbix Server.
-A documentação do monitoramento está organizada em três partes:
-Documento	Descrição
-`1-slas`	Regras de SLA e critérios de criticidade
-`2-catalogo-alertas`	Catálogo e padronização dos alertas
-`3-implementacao-zabbix`	Implementação dos itens, triggers e validações no Zabbix
+📊## 📊 Monitoramento e observabilidade
 
-🚨 Simulação de incidentes
+O monitoramento do ambiente é realizado pelo Zabbix, responsável pela coleta de dados e avaliação das condições dos serviços.
+
+O Grafana é utilizado como camada de visualização, permitindo acompanhar indicadores de disponibilidade e desempenho do ambiente.
+
+Entre os serviços monitorados estão:
+
+- Nginx
+- App Web
+- PostgreSQL
+- Zabbix Server
+
+A documentação do monitoramento está organizada em três partes:
+
+| Documento | Descrição |
+|---|---|
+| `1-slas` | Regras de SLA e critérios de criticidade |
+| `2-catalogo-alertas` | Catálogo e padronização dos alertas |
+| `3-implementacao-zabbix` | Implementação dos itens, triggers e validações no Zabbix |
+
+---
+
+## 🚨 Simulação de incidentes
+
 Com a infraestrutura e o monitoramento configurados, o projeto utiliza falhas controladas para validar o comportamento do ambiente diante de diferentes situações de indisponibilidade ou degradação.
+
 O fluxo operacional utilizado nas simulações é:
-```text
-Falha controlada
-      ↓
-Detecção pelo Zabbix
-      ↓
-Trigger
-      ↓
-Problem
-      ↓
-Análise do impacto
-      ↓
-Tratamento
-      ↓
-Recuperação
-      ↓
-Validação
+
+    Falha controlada
+          ↓
+    Detecção pelo Zabbix
+          ↓
+    Trigger
+          ↓
+    Problem
+          ↓
+    Análise do impacto
+          ↓
+    Tratamento
+          ↓
+    Recuperação
+          ↓
+    Validação
 
 Cada incidente é documentado individualmente, registrando o cenário, a falha simulada, a detecção, o impacto observado, as ações realizadas e o resultado da recuperação.
 
 Os incidentes estão organizados em:
 
-📂 3-incidentes
+📂 `3-incidentes`
 
-🔄 Ciclo operacional
+---
+
+## 🔄 Ciclo operacional
 
 O projeto busca representar, em ambiente controlado, um ciclo simplificado de operação de infraestrutura:
 
-Infraestrutura
-      ↓
-Monitoramento
-      ↓
-Detecção
-      ↓
-Alerta
-      ↓
-Incidente
-      ↓
-Tratamento
-      ↓
-Recuperação
-      ↓
-Validação
+    Infraestrutura
+          ↓
+    Monitoramento
+          ↓
+    Detecção
+          ↓
+    Alerta
+          ↓
+    Incidente
+          ↓
+    Tratamento
+          ↓
+    Recuperação
+          ↓
+    Validação
 
 Dessa forma, o laboratório conecta a implementação técnica dos serviços à observação de seu comportamento e à resposta diante de falhas.
 
-📁 Estrutura do projeto
-docker-zabbix-grafana-monitoring/
-│
-├── 1-arquitetura/
-│   └── Documentação da arquitetura
-│
-├── 2-monitoramento/
-│   ├── 1-slas/
-│   ├── 2-catalogo-alertas/
-│   └── 3-implementacao-zabbix/
-│
-├── 3-incidentes/
-│   ├── INCIDENTE-1/
-│   │   └── INC-001.md
-│   ├── INCIDENTE-2/
-│   │   └── INC-002.md
-│   ├── INCIDENTE-3/
-│   │   └── INC-003.md
-│   ├── INCIDENTE-4/
-│   │   └── INC-004.md
-│   ├── INCIDENTE-5/
-│   │   └── INC-005.md
-│   └── README.md
-│
-├── app/
-│   └── Aplicação Web
-│
-├── app-backend/
-│   └── Backend da aplicação
-│
-├── nginx/
-│   └── Configuração do Reverse Proxy
-│
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-└── LICENSE
-🛠️ Tecnologias utilizadas
-Infraestrutura
-Docker
-Docker Compose
-Nginx
-PostgreSQL
-Monitoramento e observabilidade
-Zabbix
-Grafana
-Aplicação
-Node.js
-Nginx
-HTML
-Ambiente
-Windows
-Docker Desktop
-▶️ Execução
-Pré-requisitos
-Docker Desktop instalado;
-Docker Compose disponível;
-arquivo .env configurado a partir do .env.example.
-Inicialização
+---
+
+## 📁 Estrutura do projeto
+
+    docker-zabbix-grafana-monitoring/
+    │
+    ├── 1-arquitetura/
+    │   └── Documentação da arquitetura
+    │
+    ├── 2-monitoramento/
+    │   ├── 1-slas/
+    │   ├── 2-catalogo-alertas/
+    │   └── 3-implementacao-zabbix/
+    │
+    ├── 3-incidentes/
+    │   ├── INCIDENTE-1/
+    │   │   └── INC-001.md
+    │   ├── INCIDENTE-2/
+    │   │   └── INC-002.md
+    │   ├── INCIDENTE-3/
+    │   │   └── INC-003.md
+    │   ├── INCIDENTE-4/
+    │   │   └── INC-004.md
+    │   ├── INCIDENTE-5/
+    │   │   └── INC-005.md
+    │   └── README.md
+    │
+    ├── app/
+    │   └── Aplicação Web
+    │
+    ├── app-backend/
+    │   └── Backend da aplicação
+    │
+    ├── nginx/
+    │   └── Configuração do Reverse Proxy
+    │
+    ├── docker-compose.yml
+    ├── .env.example
+    ├── .gitignore
+    └── LICENSE
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+### Infraestrutura
+
+- Docker
+- Docker Compose
+- Nginx
+- PostgreSQL
+
+### Monitoramento e observabilidade
+
+- Zabbix
+- Grafana
+
+### Aplicação
+
+- Node.js
+- Nginx
+- HTML
+
+### Ambiente
+
+- Windows
+- Docker Desktop
+
+---
+
+## ▶️ Execução
+
+### Pré-requisitos
+
+- Docker Desktop instalado;
+- Docker Compose disponível;
+- arquivo `.env` configurado a partir do `.env.example`.
+
+### Inicialização
 
 Clone o repositório:
 
-git clone https://github.com/laynyvitoria/docker-zabbix-grafana-monitoring.git
+    git clone https://github.com/laynyvitoria/docker-zabbix-grafana-monitoring.git
 
 Acesse o diretório:
 
-cd docker-zabbix-grafana-monitoring
+    cd docker-zabbix-grafana-monitoring
 
 Configure as variáveis de ambiente:
 
-cp .env.example .env
+    cp .env.example .env
 
 Inicie os serviços:
 
-docker compose up -d
+    docker compose up -d
 
 Verifique os containers:
 
-docker ps
+    docker ps
 
 Após a inicialização, os serviços podem ser acessados e validados conforme a documentação específica do projeto.
 
-📚 Documentação
-🏗️ Arquitetura
-📊 Monitoramento
-🚨 Incidentes
-📄 Licença
+---
+
+## 📚 Documentação
+
+- 🏗️ [Arquitetura](1-arquitetura/)
+- 📊 [Monitoramento](2-monitoramento/)
+- 🚨 [Incidentes](3-incidentes/)
+
+---
+
+## 📄 Licença
 
 Este projeto está disponível sob a licença MIT.
