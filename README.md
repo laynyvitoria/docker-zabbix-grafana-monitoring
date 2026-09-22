@@ -2,12 +2,12 @@
 
 > Laboratório prático de infraestrutura, monitoramento e operação de ambientes conteinerizados, desenvolvido para explorar na prática a relação entre aplicação, infraestrutura, redes, observabilidade e resposta a incidentes.
 
-![Docker](https://shields.io)](https://docker.com)
-![Zabbix](https://shields.io)](https://zabbix.com)
-![Grafana](https://shields.io)](https://grafana.com)
-![Nginx](https://shields.io)](https://nginx.org)
-![Node.js](https://shields.io)](https://nodejs.org)
-![PostgreSQL](https://shields.io)](https://postgresql.org)
+![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
+![Zabbix](https://img.shields.io/badge/Zabbix-Monitoring-red)
+![Grafana](https://img.shields.io/badge/Grafana-Observability-orange)
+![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-green)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-brightgreen)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
 
 ---
 
