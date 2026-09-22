@@ -110,7 +110,7 @@ Cada incidente é documentado individualmente, registrando o cenário, a falha s
 
 Os incidentes estão organizados em:
 
-📂 `3-incidentes`
+* [📂 **3-incidentes**](./3-incidentes/)
 
 
 ---
@@ -251,9 +251,9 @@ Após a inicialização, os serviços podem ser acessados e validados conforme a
 
 ## 📚 Documentação
 
-* 🏗️ [Arquitetura](1-arquitetura/)
-* 📊 [Monitoramento](2-monitoramento/)
-* 🚨 [Incidentes](3-incidentes/)
+* [🏗️ 📂 **Arquitetura**](./1-arquitetura/)
+* [📊 📂 **Monitoramento**](./2-monitoramento/)
+* [🚨 📂 **Incidentes**](./3-incidentes/)
 
 ---
 
