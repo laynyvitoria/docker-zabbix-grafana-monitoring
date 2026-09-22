@@ -2,39 +2,50 @@
 
 > Laboratório prático de infraestrutura, monitoramento e operação de ambientes conteinerizados, desenvolvido para explorar na prática a relação entre aplicação, infraestrutura, redes, observabilidade e resposta a incidentes.
 
-![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
-![Zabbix](https://img.shields.io/badge/Zabbix-Monitoring-red)
-![Grafana](https://img.shields.io/badge/Grafana-Observability-orange)
-![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-green)
-![Node.js](https://img.shields.io/badge/Node.js-Backend-brightgreen)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+[![Docker](https://shields.io)](https://docker.com)
+[![Zabbix](https://shields.io)](https://zabbix.com)
+[![Grafana](https://shields.io)](https://grafana.com)
+[![Nginx](https://shields.io)](https://nginx.org)
+[![Node.js](https://shields.io)](https://nodejs.org)
+[![PostgreSQL](https://shields.io)](https://postgresql.org)
 
-📌 Visão geral
-Este projeto implementa um ambiente de multisserviços executado em Docker, integrado a uma estrutura de monitoramento e observabilidade utilizando Zabbix e Grafana.
-O ambiente foi desenvolvido como um laboratório prático para estudar a relação entre infraestrutura, aplicação, redes, monitoramento e operação de serviços.
-A arquitetura utiliza redes Docker isoladas para separar as diferentes camadas do ambiente, enquanto o Zabbix realiza a coleta e avaliação das condições dos serviços monitorados e o Grafana fornece a visualização das métricas.
-Além da implementação da infraestrutura e do monitoramento, o projeto contempla a simulação controlada de falhas e a documentação dos incidentes gerados durante os testes.
+---
 
-🎯 Objetivos
-Praticar a construção de ambientes conteinerizados com Docker.
-Implementar segmentação de redes entre diferentes camadas da aplicação.
-Utilizar Nginx como Reverse Proxy.
-Monitorar serviços utilizando Zabbix.
-Visualizar métricas e indicadores utilizando Grafana.
-Definir critérios de SLA e criticidade para os serviços.
-Criar itens e triggers para detecção de falhas.
-Simular falhas controladas no ambiente.
-Observar a detecção e recuperação dos serviços.
-Documentar incidentes e suas respectivas tratativas.
+## 📌 Visão geral
 
-🏗️ Arquitetura
+Este projeto implementa um ambiente de multisserviços executado em Docker, integrado a uma estrutura de monitoramento e observabilidade utilizando Zabbix e Grafana. O ambiente foi desenvolvido como um laboratório prático para estudar a relação entre infraestrutura, aplicação, redes, monitoramento e operação de serviços.
+
+A arquitetura utiliza redes Docker isoladas para separar as diferentes camadas do ambiente, enquanto o Zabbix realiza a coleta e avaliação das condições dos serviços monitorados e o Grafana fornece a visualização das métricas. Além da implementação da infraestrutura e do monitoramento, o projeto contempla a simulação controlada de falhas e a documentação dos incidentes gerados durante os testes.
+
+---
+
+## 🎯 Objetivos
+
+* Praticar a construção de ambientes conteinerizados com Docker.
+* Implementar segmentação de redes entre diferentes camadas da aplicação.
+* Utilizar Nginx como Reverse Proxy.
+* Monitorar serviços utilizando Zabbix.
+* Visualizar métricas e indicadores utilizando Grafana.
+* Definir critérios de SLA e criticidade para os serviços.
+* Criar itens e triggers para detecção de falhas.
+* Simular falhas controladas no ambiente.
+* Observar a detecção e recuperação dos serviços.
+* Documentar incidentes e suas respectivas tratativas.
+
+---
+
+## 🎼 Arquitetura
+
 O ambiente é executado em um Docker Host e organizado em três redes virtuais:
-`public-net` — camada de entrada;
-`app-net` — camada de aplicação;
-`backend-net` — camada de dados e serviços internos.
-O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicação, encaminhando-as para os serviços internos.
-O Zabbix realiza o monitoramento dos componentes do ambiente, enquanto o Grafana é utilizado para visualização das métricas coletadas.
-Arquitetura do ambiente
+
+* **`public-net`** — camada de entrada;
+* **`app-net`** — camada de aplicação;
+* **`backend-net`** — camada de dados e serviços internos.
+
+O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicação, encaminhando-as para os serviços internos. O Zabbix realiza o monitoramento dos componentes do ambiente, enquanto o Grafana é utilizado para visualização das métricas coletadas.
+
+### Arquitetura do ambiente
+
 <p align="center">
   <img src="1-arquitetura/Multi-Service%20Environment%20Monitoring.png"
        alt="Arquitetura do ambiente de monitoramento"
