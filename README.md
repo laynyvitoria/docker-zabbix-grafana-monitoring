@@ -38,7 +38,7 @@ Arquitetura do ambiente
 <p align="center">
   <img src="1-arquitetura/Multi-Service%20Environment%20Monitoring.png"
        alt="Arquitetura do ambiente de monitoramento"
-       width="750">
+       width="450">
 </p>
 <p align="center">
   <em>Figura 1 — Topologia lógica da arquitetura.</em>
