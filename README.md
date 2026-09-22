@@ -54,8 +54,12 @@ O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicaç
 <p align="center">
   <em>Figura 1 — Topologia lógica da arquitetura.</em>
 </p>
+
+
 A especificação da arquitetura, incluindo a divisão das redes, componentes e fluxos de comunicação, está documentada em:
-* 📂 <a href="./1-arquitetura/"><img src="https://githubusercontent.com" width="16" height="16"> **1-arquitetura**</a>
+
+* [📂 **1-arquitetura**](./1-arquitetura/)
+
 
 
 ## 📊 Monitoramento e observabilidade
@@ -71,14 +75,13 @@ Entre os serviços monitorados estão:
 * PostgreSQL
 * Zabbix Server
 
-A documentação do monitoramento está organizada em três partes:
+A documentação do monitoramento está organizada em subseções acessíveis abaixo:
 
 | Documento | Descrição |
 |---|---|
-| `1-slas` | Regras de SLA e critérios de criticidade |
-| `2-catalogo-alertas` | Catálogo e padronização dos alertas |
-| `3-implementacao-zabbix` | Implementação dos itens, triggers e validações no Zabbix |
-
+| [📂 **1-slas**](./2-monitoramento/1-slas/) | Regras de SLA e critérios de criticidade |
+| [📂 **2-catalogo-alertas**](./2-monitoramento/2-catalogo-alertas/) | Catálogo e padronização dos alertas |
+| [📂 **3-implementacao-zabbix**](./2-monitoramento/3-implementacao-zabbix/) | Implementação dos itens, triggers e validações no Zabbix |
 ---
 
 ## 🚨 Simulação de incidentes
