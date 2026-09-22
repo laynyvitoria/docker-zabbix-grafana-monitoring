@@ -44,7 +44,6 @@ O ambiente é executado em um Docker Host e organizado em três redes virtuais:
 
 O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicação, encaminhando-as para os serviços internos. O Zabbix realiza o monitoramento dos componentes do ambiente, enquanto o Grafana é utilizado para visualização das métricas coletadas.
 
-### Arquitetura do ambiente
 
 <p align="center">
   <img src="1-arquitetura/Multi-Service%20Environment%20Monitoring.png"
