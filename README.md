@@ -48,8 +48,8 @@ O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicaç
 <p align="center">
   <img src="1-arquitetura/Multi-Service%20Environment%20Monitoring.png"
        alt="Arquitetura do ambiente de monitoramento"
-       width="600"
-       height="708">
+       width="650"
+       height="728">
 </p>
 <p align="center">
   <em>Figura 1 — Topologia lógica da arquitetura.</em>
