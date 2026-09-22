@@ -57,7 +57,8 @@ O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicaç
 A especificação da arquitetura, incluindo a divisão das redes, componentes e fluxos de comunicação, está documentada em:
 📂 `1-arquitetura`
 
-📊## 📊 Monitoramento e observabilidade
+
+## 📊 Monitoramento e observabilidade
 
 O monitoramento do ambiente é realizado pelo Zabbix, responsável pela coleta de dados e avaliação das condições dos serviços.
 
@@ -65,10 +66,10 @@ O Grafana é utilizado como camada de visualização, permitindo acompanhar indi
 
 Entre os serviços monitorados estão:
 
-- Nginx
-- App Web
-- PostgreSQL
-- Zabbix Server
+* Nginx
+* App Web
+* PostgreSQL
+* Zabbix Server
 
 A documentação do monitoramento está organizada em três partes:
 
