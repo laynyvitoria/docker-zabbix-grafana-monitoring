@@ -109,27 +109,29 @@ Os incidentes estão organizados em:
 
 📂 `3-incidentes`
 
----
 
+---
 ## 🔄 Ciclo operacional
 
 O projeto busca representar, em ambiente controlado, um ciclo simplificado de operação de infraestrutura:
 
-    Infraestrutura
-          ↓
-    Monitoramento
-          ↓
-    Detecção
-          ↓
-    Alerta
-          ↓
-    Incidente
-          ↓
-    Tratamento
-          ↓
-    Recuperação
-          ↓
-    Validação
+```text
+Infraestrutura
+      ↓
+Monitoramento
+      ↓
+  Detecção
+      ↓
+   Alerta
+      ↓
+  Incidente
+      ↓
+  Tratamento
+      ↓
+ Recuperação
+      ↓
+  Validação
+```
 
 Dessa forma, o laboratório conecta a implementação técnica dos serviços à observação de seu comportamento e à resposta diante de falhas.
 
@@ -137,42 +139,44 @@ Dessa forma, o laboratório conecta a implementação técnica dos serviços à 
 
 ## 📁 Estrutura do projeto
 
-    docker-zabbix-grafana-monitoring/
-    │
-    ├── 1-arquitetura/
-    │   └── Documentação da arquitetura
-    │
-    ├── 2-monitoramento/
-    │   ├── 1-slas/
-    │   ├── 2-catalogo-alertas/
-    │   └── 3-implementacao-zabbix/
-    │
-    ├── 3-incidentes/
-    │   ├── INCIDENTE-1/
-    │   │   └── INC-001.md
-    │   ├── INCIDENTE-2/
-    │   │   └── INC-002.md
-    │   ├── INCIDENTE-3/
-    │   │   └── INC-003.md
-    │   ├── INCIDENTE-4/
-    │   │   └── INC-004.md
-    │   ├── INCIDENTE-5/
-    │   │   └── INC-005.md
-    │   └── README.md
-    │
-    ├── app/
-    │   └── Aplicação Web
-    │
-    ├── app-backend/
-    │   └── Backend da aplicação
-    │
-    ├── nginx/
-    │   └── Configuração do Reverse Proxy
-    │
-    ├── docker-compose.yml
-    ├── .env.example
-    ├── .gitignore
-    └── LICENSE
+```text
+docker-zabbix-grafana-monitoring/
+│
+├── 1-arquitetura/
+│   └── Documentação da arquitetura
+│
+├── 2-monitoramento/
+│   ├── 1-slas/
+│   ├── 2-catalogo-alertas/
+│   └── 3-implementacao-zabbix/
+│
+├── 3-incidentes/
+│   ├── INCIDENTE-1/
+│   │   └── INC-001.md
+│   ├── INCIDENTE-2/
+│   │   └── INC-002.md
+│   ├── INCIDENTE-3/
+│   │   └── INC-003.md
+│   ├── INCIDENTE-4/
+│   │   └── INC-004.md
+│   ├── INCIDENTE-5/
+│   │   └── INC-005.md
+│   └── README.md
+│
+├── app/
+│   └── Aplicação Web
+│
+├── app-backend/
+│   └── Backend da aplicação
+│
+├── nginx/
+│   └── Configuração do Reverse Proxy
+│
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+└── LICENSE
+```
 
 ---
 
@@ -180,26 +184,26 @@ Dessa forma, o laboratório conecta a implementação técnica dos serviços à 
 
 ### Infraestrutura
 
-- Docker
-- Docker Compose
-- Nginx
-- PostgreSQL
+* Docker
+* Docker Compose
+* Nginx
+* PostgreSQL
 
 ### Monitoramento e observabilidade
 
-- Zabbix
-- Grafana
+* Zabbix
+* Grafana
 
 ### Aplicação
 
-- Node.js
-- Nginx
-- HTML
+* Node.js
+* Nginx
+* HTML
 
 ### Ambiente
 
-- Windows
-- Docker Desktop
+* Windows
+* Docker Desktop
 
 ---
 
@@ -207,31 +211,36 @@ Dessa forma, o laboratório conecta a implementação técnica dos serviços à 
 
 ### Pré-requisitos
 
-- Docker Desktop instalado;
-- Docker Compose disponível;
-- arquivo `.env` configurado a partir do `.env.example`.
+* Docker Desktop instalado;
+* Docker Compose disponível;
+* Arquivo `.env` configurado a partir do `.env.example`.
 
 ### Inicialização
 
 Clone o repositório:
-
-    git clone https://github.com/laynyvitoria/docker-zabbix-grafana-monitoring.git
+```bash
+git clone https://github.com
+```
 
 Acesse o diretório:
-
-    cd docker-zabbix-grafana-monitoring
+```bash
+cd docker-zabbix-grafana-monitoring
+```
 
 Configure as variáveis de ambiente:
-
-    cp .env.example .env
+```bash
+cp .env.example .env
+```
 
 Inicie os serviços:
-
-    docker compose up -d
+```bash
+docker compose up -d
+```
 
 Verifique os containers:
-
-    docker ps
+```bash
+docker ps
+```
 
 Após a inicialização, os serviços podem ser acessados e validados conforme a documentação específica do projeto.
 
@@ -239,9 +248,9 @@ Após a inicialização, os serviços podem ser acessados e validados conforme a
 
 ## 📚 Documentação
 
-- 🏗️ [Arquitetura](1-arquitetura/)
-- 📊 [Monitoramento](2-monitoramento/)
-- 🚨 [Incidentes](3-incidentes/)
+* 🏗️ [Arquitetura](1-arquitetura/)
+* 📊 [Monitoramento](2-monitoramento/)
+* 🚨 [Incidentes](3-incidentes/)
 
 ---
 
