@@ -1,4 +1,4 @@
-Docker Zabbix Grafana Monitoring
+# Docker Zabbix Grafana Monitoring
 
 > Laboratório prático de infraestrutura, monitoramento e operação de ambientes conteinerizados, desenvolvido para explorar na prática a relação entre aplicação, infraestrutura, redes, observabilidade e resposta a incidentes.
 
@@ -38,7 +38,7 @@ Arquitetura do ambiente
 <p align="center">
   <img src="1-arquitetura/Multi-Service%20Environment%20Monitoring.png"
        alt="Arquitetura do ambiente de monitoramento"
-       width="900">
+       width="750">
 </p>
 <p align="center">
   <em>Figura 1 — Topologia lógica da arquitetura.</em>
