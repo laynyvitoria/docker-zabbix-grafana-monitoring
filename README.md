@@ -55,7 +55,7 @@ O Nginx atua como Reverse Proxy e recebe as requisições destinadas à aplicaç
   <em>Figura 1 — Topologia lógica da arquitetura.</em>
 </p>
 A especificação da arquitetura, incluindo a divisão das redes, componentes e fluxos de comunicação, está documentada em:
-📂 `1-arquitetura`
+* 📂 <a href="./1-arquitetura/"><img src="https://githubusercontent.com" width="16" height="16"> **1-arquitetura**</a>
 
 
 ## 📊 Monitoramento e observabilidade
