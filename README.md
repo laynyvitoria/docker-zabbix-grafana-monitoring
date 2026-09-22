@@ -251,9 +251,9 @@ Após a inicialização, os serviços podem ser acessados e validados conforme a
 
 ## 📚 Documentação
 
-* [🏗️ 📂 **Arquitetura**](./1-arquitetura/)
-* [📊 📂 **Monitoramento**](./2-monitoramento/)
-* [🚨 📂 **Incidentes**](./3-incidentes/)
+* [ **Arquitetura**](./1-arquitetura/)
+* [ **Monitoramento**](./2-monitoramento/)
+* [ **Incidentes**](./3-incidentes/)
 
 ---
 
