@@ -1,5 +1,3 @@
----
-
 # 🚨 INC-002 — Indisponibilidade do Nginx / Reverse Proxy
 
 ## Relatório de Simulação de Incidente
