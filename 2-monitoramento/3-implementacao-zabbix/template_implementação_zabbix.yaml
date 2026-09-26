@@ -1,0 +1,98 @@
+zabbix_export:
+  version: '7.4'
+  host_groups:
+    - uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Applications
+    - uuid: 748ad4d098d447d492bb935c907f652f
+      name: Databases
+    - uuid: dc579cd7a1a34222933f24f52a68bcd8
+      name: 'Linux servers'
+  hosts:
+    - host: 'App Backend'
+      name: 'App Backend'
+      groups:
+        - name: Applications
+      items:
+        - name: 'Backend Response Time'
+          type: HTTP_AGENT
+          key: backend.response.time
+          value_type: FLOAT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.delay
+            - type: REGEX
+              parameters:
+                - '^([0-9]+)ms$'
+                - \1
+          url: 'http://app-backend:3000/slow?delay=500'
+          triggers:
+            - expression: 'last(/App Backend/backend.response.time)>3000'
+              name: 'APP-02 - Lentidão da aplicação'
+              priority: WARNING
+    - host: 'App Web'
+      name: 'App Web'
+      groups:
+        - name: Applications
+      items:
+        - name: 'APP-01 - Disponibilidade do App Web'
+          type: SIMPLE
+          key: 'net.tcp.service[tcp,app-web,80]'
+          triggers:
+            - expression: 'last(/App Web/net.tcp.service[tcp,app-web,80])=0'
+              name: 'APP-01 - Aplicação indisponível'
+              priority: DISASTER
+      httptests:
+        - name: 'APP-02 - Tempo de resposta do App Web'
+          steps:
+            - name: 'APP-02 - Requisição HTTP'
+              url: 'http://app-web:80'
+              follow_redirects: 'NO'
+              timeout: 10s
+              status_codes: '200'
+    - host: Nginx
+      name: Nginx
+      groups:
+        - name: 'Linux servers'
+      items:
+        - name: 'NGINX-01 - Disponibilidade Nginx'
+          type: SIMPLE
+          key: 'net.tcp.service[tcp,nginx,80]'
+          delay: 30s
+          triggers:
+            - expression: 'last(/Nginx/net.tcp.service[tcp,nginx,80])=0'
+              name: 'NGINX-01 - Nginx indisponível'
+              priority: DISASTER
+    - host: PostgreSQL
+      name: PostgreSQL
+      groups:
+        - name: Databases
+      interfaces:
+        - useip: 'NO'
+          ip: ''
+          dns: zabbix-agent-postgres
+          interface_ref: if1
+      items:
+        - name: 'DB-01 - Disponibilidade PostgreSQL'
+          type: SIMPLE
+          key: 'net.tcp.service[tcp,postgres,5432]'
+          delay: 30s
+          history: 7d
+          triggers:
+            - expression: 'last(/PostgreSQL/net.tcp.service[tcp,postgres,5432])=0'
+              name: 'DB-01 - Disponibilidade PostgreSQL'
+              priority: HIGH
+        - name: 'DB-02 - Uso de disco PostgreSQL'
+          key: 'vfs.fs.size[/,pused]'
+          delay: 30s
+          value_type: FLOAT
+          units: '%'
+          interface_ref: if1
+          triggers:
+            - expression: 'last(/PostgreSQL/vfs.fs.size[/,pused])=85'
+              name: 'DB-02 - Disco do PostgreSQL acima de 85%'
+              priority: WARNING
+  triggers:
+    - expression: 'last(/App Web/web.test.time[APP-02 - Tempo de resposta do App Web,APP-02 - Requisição HTTP,resp])>3000'
+      name: 'APP-02 - Lentidão da aplicação'
+      priority: WARNING
