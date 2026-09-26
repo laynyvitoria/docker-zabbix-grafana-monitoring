@@ -58,8 +58,6 @@ Valores de até **3000 ms** foram considerados dentro do limite definido para o 
 
 ### Evidências de Normalidade
 
-![App Backend em estado normal no Grafana](evidencias/grafana-ok-appbackend.png)
-
 ---
 
 ### Monitoramento Inicial (Zabbix)
